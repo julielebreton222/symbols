@@ -86,3 +86,6 @@
 2026-10-10 21:57:18  wiki_articles: 967 articles; fuller overviews for 50 entries, passages for 46 entries in other articles
 2026-10-10 21:57:19  export: 1736 entries; index 766 KB, cards 7068 KB
 2026-10-10 21:58:13  export: 1736 entries; index 766 KB, cards 7068 KB
+2026-10-10 22:00:10  cards: 22 full cards loaded, 0 with errors
+2026-10-10 22:01:13  cards: 24 full cards loaded, 0 with errors
+2026-10-10 22:01:20  export: 1736 entries; index 766 KB, cards 7116 KB
