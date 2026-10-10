@@ -9,7 +9,7 @@ story's), keep the paragraphs of that article that name the entry.
 All text is Wikipedia's (CC BY-SA 4.0), credited with the article and revision.
 Articles are cached in .cache/articles/.
 
-Usage: python3 ingest/wiki_articles.py [--fetch-only]
+Usage: python3 ingest/wiki_articles.py [--fetch-only | --cached-only]
 """
 import json
 import os
@@ -32,10 +32,15 @@ def path_for(title):
     return os.path.join(DIR, re.sub(r"[^\w\-]+", "_", title)[:150] + ".json")
 
 
+CACHED_ONLY = "--cached-only" in sys.argv
+
+
 def fetch(title):
     p = path_for(title)
     if os.path.exists(p):
         return json.load(open(p))
+    if CACHED_ONLY:
+        return None
     r = wm.wp(action="query", titles=title, prop="extracts|revisions", explaintext=1, exsectionformat="wiki",
               rvprop="ids", redirects=1)
     pages = r.get("query", {}).get("pages", [])

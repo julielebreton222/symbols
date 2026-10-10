@@ -28,6 +28,7 @@ Ravidassia | Punjab | 31, 75.3 |
 Akan (Ghana) | Ghana | 6.7, -1.6 |
 Yoruba religion | Nigeria & Benin | 7.5, 4 | Yoruba mythology
 Igbo religion | South-east Nigeria | 6, 7.5 | Igbo mythology
+Ndembu (Zambia) | Northwestern Zambia | -12.2, 25.0 | Ndembu; Victor Turner’s analytical framing of Ndembu ethnography
 Christian tradition | The Levant, then worldwide | 31.8, 35.2 | Christian mythology; Christianity; Christian; Book of Revelation
 Jewish tradition | The Land of Israel | 31.8, 35.2 | Jewish mythology; Judaism; Jewish; Jewish folklore
 Abrahamic traditions | The Middle East | 31.8, 35.2 | Abrahamic religion; Abrahamic religions

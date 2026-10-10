@@ -17,7 +17,7 @@ from common import ROOT, add_to_list, db, log, slugify, source, wiki_source
 
 SECTIONS = {"overview": "Overview", "myth": "Myth & Origin", "lifetime": "Lifetime", "today": "Today",
             "seen": "How it was seen", "debates": "Debates", "article": "Article", "deeper": "Go deeper",
-            "connections": "Connections", "sources": "Sources", "tales": "In the tales"}
+            "connections": "Connections", "sources": "Sources", "tales": "In the tales", "journey": "Journey"}
 BY_HEADING = {v.lower(): k for k, v in SECTIONS.items()}
 LINK_TYPES = {"same-theme", "same-owner", "same-story", "same-culture", "evolved-into", "derived-from",
               "mistaken-for", "parallel", "part-of", "related"}
@@ -204,6 +204,22 @@ def load(con, path, known):
     if "overview" in secs:
         plain = re.sub(r"<[^>]+>", "", blocks(secs["overview"], known)[0])
         con.execute("UPDATE entries SET overview=?, overview_src=? WHERE slug=?", (html.unescape(plain), "card:" + slug, slug))
+
+    # Journey: "- year | place | lat, lon | what happened there [src: key]"
+    con.execute("DELETE FROM journeys WHERE slug=?", (slug,))
+    for i, line in enumerate(l.strip() for l in secs.get("journey", "").split("\n") if l.strip().startswith("- ")):
+        f = [x.strip() for x in line[2:].split(" | ")]
+        if len(f) < 4:
+            raise CardError(f"journey line needs year | place | lat, lon | text: {line}")
+        m = SRC.search(f[3])
+        jk = [x.strip() for x in m.group(1).split(",")] if m else []
+        text = f[3][:m.start()] if m else f[3]
+        for k in jk:
+            if k not in keys:
+                raise CardError(f"journey: unknown source key {k}")
+        lat, lon = [float(x) for x in f[2].split(",")]
+        con.execute("INSERT INTO journeys VALUES (?,?,?,?,?,?,?,?)", (slug, i, int(f[0]), f[1], lat, lon, text.strip(),
+                                                                      keys[jk[0]] if jk else None))
 
     # Go deeper: "- kind | text | url"
     for i, line in enumerate(l.strip() for l in secs.get("deeper", "").split("\n") if l.strip().startswith("- ")):

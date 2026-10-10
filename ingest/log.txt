@@ -80,3 +80,9 @@
 2026-10-10 21:47:15  export: 1736 entries; index 766 KB, cards 6019 KB
 2026-10-10 21:48:53  cards: 20 full cards loaded, 0 with errors
 2026-10-10 21:50:14  export: 1736 entries; index 766 KB, cards 6042 KB
+2026-10-10 21:53:39  cards: 20 full cards loaded, 0 with errors
+2026-10-10 21:56:17  tales: 7219 tales read; 6278 tale links for 326 entries
+2026-10-10 21:56:18  export: 1736 entries; index 766 KB, cards 6741 KB
+2026-10-10 21:57:18  wiki_articles: 967 articles; fuller overviews for 50 entries, passages for 46 entries in other articles
+2026-10-10 21:57:19  export: 1736 entries; index 766 KB, cards 7068 KB
+2026-10-10 21:58:13  export: 1736 entries; index 766 KB, cards 7068 KB

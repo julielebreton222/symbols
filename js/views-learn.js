@@ -34,20 +34,70 @@
   // Each maker returns null when the entry lacks what that question needs.
   const makers = {
     async owner(e) {
-      const own = (e.ow || []).filter(o => o.toLowerCase() !== e.t.toLowerCase());
+      // no giveaways: skip when the owner's name is in the object's name ("Heracles's arrows")
+      const words = A.fold([e.t, ...e.a].join(' '));
+      const own = (e.ow || []).filter(o => !words.includes(A.fold(o).split(/[ (]/)[0]) && A.fold(o) !== A.fold(e.t));
       if (!own.length) return null;
       const right = own[0];
-      const others = uniq(D.entries().filter(x => x.ow && x.ow.length && !own.includes(x.ow[0]) && x.cu.some(c => e.cu.includes(c))).map(x => x.ow[0]));
-      const more = uniq(D.entries().filter(x => x.ow && x.ow.length && !own.includes(x.ow[0])).map(x => x.ow[0]));
-      const wrong = uniq([...sample(others, 3), ...sample(more, 6)]).filter(o => !own.includes(o)).slice(0, 3);
+      // wrong answers: other owners from the same culture first, so the culture does not give it away
+      const sameCult = uniq(D.entries().filter(x => x.ow && x.ow.length && x.cu.some(c => e.cu.includes(c))).map(x => x.ow[0])).filter(o => !e.ow.includes(o));
+      const any = uniq(D.entries().filter(x => x.ow && x.ow.length).map(x => x.ow[0])).filter(o => !e.ow.includes(o));
+      const wrong = uniq([...sample(sameCult, 3), ...sample(any, 6)]).slice(0, 3);
       if (wrong.length < 3) return null;
       return { kind: 'Whose object is this?', q: `Whose is <b>${esc(e.t)}</b>?`, right, opts: shuffle([right, ...wrong]) };
+    },
+    async belongs(e) {
+      // the reverse: which of these belongs to X?
+      const own = (e.ow || []).find(o => !A.fold([e.t, ...e.a].join(' ')).includes(A.fold(o).split(/[ (]/)[0]) && A.fold(o) !== A.fold(e.t));
+      if (!own) return null;
+      const pool = D.entries().filter(x => x.s !== e.s && x.c[0] === e.c[0] && !(x.ow || []).includes(own) && !A.fold(x.t).includes(A.fold(own).split(' ')[0]));
+      const same = pool.filter(x => x.cu.some(c => e.cu.includes(c)));
+      const wrong = uniq([...sample(same, 3), ...sample(pool, 6)].map(x => x.t)).filter(t => t !== e.t).slice(0, 3);
+      if (wrong.length < 3) return null;
+      return { kind: 'Whose object is this?', q: `Which of these belongs to <b>${esc(own)}</b>?`, right: e.t, opts: shuffle([e.t, ...wrong]) };
     },
     async culture(e) {
       const right = e.cu[0] || (e.tr || [])[0];
       if (!right) return null;
-      const all = Object.keys(D.meta().cultures).filter(c => c !== right && !e.cu.includes(c) && !(e.tr || []).includes(c));
-      return { kind: 'Which culture?', q: `Where does <b>${esc(e.t)}</b> come from?`, right, opts: shuffle([right, ...sample(all, 3)]) };
+      // no giveaways: skip when a word of the culture is in the name ("Norse", "Irish", "Greek")
+      const words = A.fold([e.t, ...e.a].join(' '));
+      if (A.fold(right).split(/\W+/).some(w => w.length > 3 && !/mytholog|tradition|folklore|legend|religion/.test(w) && words.includes(w))) return null;
+      // wrong answers: well-known cultures, so the answer is not the only famous one
+      const big = Object.entries(D.meta().cultures).filter(([c, v]) => v.n >= 8 && c !== right && !e.cu.includes(c) && !(e.tr || []).includes(c)).map(([c]) => c);
+      return { kind: 'Which culture?', q: `Where does <b>${esc(e.t)}</b> come from?`, right, opts: shuffle([right, ...sample(big, 3)]) };
+    },
+    async era(e) {
+      if (e.y == null) return null;
+      const label = y => {
+        if (y < -1000) return 'Before 1000 BCE';
+        const c = y < 0 ? Math.ceil(-y / 100) : Math.floor(y / 100) + 1;
+        const suf = c % 100 >= 11 && c % 100 <= 13 ? 'th' : ({ 1: 'st', 2: 'nd', 3: 'rd' }[c % 10] || 'th');
+        return `${c}${suf} century${y < 0 ? ' BCE' : ''}`;
+      };
+      const right = label(e.y);
+      const others = uniq([-1500, -700, -300, 100, 500, 900, 1150, 1350, 1600, 1850, 1950].filter(y => Math.abs(y - e.y) > 250).map(label)).filter(x => x !== right);
+      if (others.length < 3) return null;
+      return { kind: 'When?', q: `When does <b>${esc(e.t)}</b> first appear?`, right, opts: shuffle([right, ...sample(others, 3)]) };
+    },
+    async whichbook(e) {
+      // read a book's reading with the name hidden: which entry is it?
+      const c = await D.card(e.s);
+      const refs = (c.refs || []).filter(r => r.sum && !A.fold(r.sum).includes(A.fold(r.h)));
+      if (!refs.length) return null;
+      const r = pick(refs), book = (D.meta().refbooks || {})[r.b] || {};
+      const others = sample(D.entries().filter(x => x.s !== e.s && (x.rb || []).includes(r.b)), 3).map(x => x.t);
+      if (others.length < 3) return null;
+      return { kind: 'What does it symbolize?', q: `Which one does <i>${esc(book.title || r.b)}</i> read like this?`, clue: r.sum, right: e.t, opts: shuffle([e.t, ...others]) };
+    },
+    async oddone(e) {
+      const c = await D.card(e.s);
+      const linked = uniq((c.conn || []).map(x => x.to)).filter(s => D.get(s));
+      if (linked.length < 3) return null;
+      const three = sample(linked, 3).map(s => D.get(s).t);
+      const odd = pick(D.entries().filter(x => x.s !== e.s && !linked.includes(x.s) && x.c[0] === e.c[0] && x.cu.some(c => e.cu.includes(c))) .concat([]))
+        || pick(D.entries().filter(x => x.s !== e.s && !linked.includes(x.s) && x.c[0] === e.c[0]));
+      if (!odd) return null;
+      return { kind: 'Match the parallels', q: `Which of these is <i>not</i> connected to <b>${esc(e.t)}</b>?`, right: odd.t, opts: shuffle([odd.t, ...three]) };
     },
     async meaning(e) {
       const c = await D.card(e.s);
@@ -92,8 +142,9 @@
         after: `${esc(D.LINK_TYPES[l.type] || l.type)}: ${l.reason}` };
     },
   };
+  // the harder kinds first; themes and name-it only when nothing else can be asked
   async function question(e, prefer) {
-    const order = shuffle(Object.keys(makers));
+    const order = [...shuffle(['owner', 'belongs', 'culture', 'era', 'meaning', 'whichbook', 'parallels', 'oddone']), ...shuffle(['name', 'themes'])];
     if (prefer) order.unshift(prefer);
     for (const k of order) { const q = await makers[k](e); if (q) return q; }
     return null;
@@ -154,7 +205,7 @@
 
   async function quiz() {
     setPage(`<h1>Quiz</h1>
-      <div class="tabs">${[['', 'Any'], ['owner', 'Whose object?'], ['culture', 'Which culture?'], ['meaning', 'What does it symbolize?'], ['parallels', 'Match the parallels'], ['name', 'Name it']]
+      <div class="tabs">${[['', 'Any'], ['owner', 'Whose object?'], ['belongs', 'Which belongs to…?'], ['culture', 'Which culture?'], ['era', 'When?'], ['meaning', 'What does it symbolize?'], ['whichbook', 'Which one, by its reading?'], ['parallels', 'Match the parallels'], ['oddone', 'Odd one out'], ['name', 'Name it']]
         .map(([k, l]) => `<button class="chip" data-k="${k}">${l}</button>`).join('')}</div>
       <div class="row" style="justify-content:center"><label><input type="checkbox" id="mineonly"> Only cards I have opened</label></div>
       <p class="center m" id="score"></p><div id="qbox"></div>`);

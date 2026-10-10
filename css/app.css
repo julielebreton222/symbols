@@ -250,3 +250,11 @@ sup.src + sup.src::before { content: ','; margin-right: .05rem; }
 .picker .sugg div { padding: .25rem .6rem; cursor: pointer; }
 .picker .sugg div:hover { background: var(--chip); }
 .tabs { display: flex; flex-wrap: wrap; gap: .3rem; justify-content: center; margin: .5rem 0 1rem; }
+
+.star { border: 0; background: none; font-size: 1.6rem; color: var(--gold); cursor: pointer; vertical-align: middle; padding: 0 .2rem; line-height: 1; }
+.star.on { color: var(--rubric); }
+.related { display: flex; flex-wrap: wrap; gap: .3rem; justify-content: center; align-items: center; margin-top: .3rem; }
+.wsec { font-family: var(--caps); color: var(--ink-soft); margin: 1rem 0 .2rem; font-size: 1.05rem; }
+.journey li b { font-family: var(--caps); color: var(--rubric); font-weight: normal; }
+.mylink { border-left: 3px solid var(--sac); padding-left: .6rem; }
+input[type=range] { accent-color: var(--rubric); }

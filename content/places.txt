@@ -1,0 +1,91 @@
+# A small gazetteer: approximate centres of the lands that tales and journeys name.
+#   name | lat, lon | other spellings (; separated)
+# Matching tries the whole place, then each part split at "/", ",", "(" and " and ".
+
+Germany | 51.0, 10.0 | Saxony; Saxony-Anhalt; Swabia; Bavaria; Upper Lusatia; Rügen; Chemnitz; Zellerfeld; East Prussia; German Hungary
+England | 52.5, -1.5 | Britain; Cornwall; Northumberland; Sunderland; Herefordshire; Yorkshire
+Denmark | 56.0, 10.0
+Ireland | 53.4, -8.0 | Northern Ireland; Connacht
+India | 22.0, 79.0 | India (Santal); Northern India; Southern India; Bengal; Punjab; Kashmir; Katha Sarit Sagara; The Panchatantra
+China | 34.0, 108.0
+Scotland | 56.8, -4.2 | Roxburghshire; Forfarshire
+Shetland Islands | 60.3, -1.3 | Shetland; Shetland and Orkney Islands
+Orkney Islands | 59.0, -3.0
+Italy | 42.8, 12.5 | Naples; Venice; Sicily; Rome; Ancient Rome
+Norway | 61.0, 9.0
+Hawaii | 20.8, -156.3
+Philippines | 12.9, 121.8 | Bukidnon; Bilaan; Bagobo; Mandaya
+Russia | 55.0, 40.0
+Hungary | 47.2, 19.5 | Austria-Hungary
+France | 46.6, 2.4 | Brittany; Alsace; Flanders
+Wales | 52.3, -3.7
+Iceland | 64.9, -18.6 | Faroe Islands
+Japan | 36.0, 138.0
+Tibet | 31.0, 89.0 | Nepal
+Ancient Greece | 38.5, 23.0 | Greece; Macedonia
+Korea | 36.5, 127.8
+Nigeria | 9.1, 8.7
+Turkey | 39.0, 35.0 | Anatolia; Lydia
+USA | 39.0, -98.0 | United States of America; North America; Virginia; North Carolina; Georgia, USA; New York; Connecticut; African American; African-American; African-America; Children’s Story
+Gabon | -0.8, 11.6
+Sweden | 62.0, 15.0
+Greenland (Inuit) | 72.0, -40.0 | Greenland; Eskimo; Inuit
+Finland | 64.0, 26.0 | Lapland
+Blackfoot | 48.5, -112.0
+South Africa | -29.0, 25.0 | Xhosa; Kaffir
+Romania | 45.9, 24.9
+Switzerland | 46.8, 8.2 | Canton of Graubünden
+Sioux | 44.0, -101.0 | Dakota
+Austria | 47.5, 14.5 | Tyrol; Carinthia; Burgenland; Lower Austria; Steyr
+Ghana | 7.9, -1.0
+Serbia | 44.0, 20.9
+Zuni | 35.1, -108.8
+Australia | -25.0, 134.0 | Australia (Noongahburrah); New South Wales
+Ukraine | 49.0, 32.0
+Poland | 52.0, 19.0
+Netherlands | 52.1, 5.3 | Holland; The Netherlands
+Wabanaki (Micmac, Penobscot) | 45.5, -67.0 | Wabanaki
+Spain and Portugal | 40.0, -4.0 | Spain; Catalonia; Basque
+Portugal | 39.5, -8.0
+New Zealand (Maori) | -40.9, 174.9 | New Zealand; Maori
+Pakistan | 30.4, 69.3
+Czechoslovakia | 49.8, 15.5 | Bohemia; Moravia; Czech Republic; Slovakia
+Sri Lanka | 7.9, 80.8
+Mexico | 23.6, -102.5
+Cherokee | 35.5, -83.5
+Isle of Man | 54.2, -4.5
+Jamaica | 18.1, -77.3 | West Indies; Antigua; Bahamas
+Slovenia | 46.1, 14.8
+Ancient Egypt | 26.8, 30.8 | Egypt
+Palestine | 31.9, 35.2 | Bible; Jewish tradition; Jewish; Jewish Legend
+Georgia | 42.3, 43.4
+Lithuania | 55.2, 23.9
+Estonia | 58.6, 25.0
+Luxembourg | 49.8, 6.1
+Malaysia | 4.2, 101.9
+Persia | 32.4, 53.7 | Iran
+East Africa | -6.0, 37.0 | Zanzibar; Swahili; Africa, Swahili; Somalia; Sudan
+Albania | 41.2, 20.2
+Belgium | 50.5, 4.5
+Syria | 34.8, 38.9
+Fiji | -17.7, 178.0
+Canada | 56.0, -96.0 | Thompson
+Croatia | 45.1, 15.2
+Bulgaria | 42.7, 25.5
+Arabia | 24.0, 45.0 | Arab; 1001 Nights; The 1001 Nights
+Armenia | 40.1, 45.0
+Morocco | 31.8, -7.1 | North Africa; French North Africa
+Algeria | 28.0, 1.7
+Madagascar | -18.8, 47.0
+West Africa | 10.0, -2.0
+Brazil | -10.0, -52.0
+Mongolia | 47.0, 104.0
+Bangladesh | 23.7, 90.4
+Paiute | 39.0, -117.0
+Skidi Pawnee | 41.5, -99.0
+Celtic lands | 53.0, -5.0 | Celtic
+Scandinavia | 62.0, 15.0 | Northern Europe
+Slavic | 52.0, 25.0
+Romani | 46.0, 22.0 | Gypsy; Romanian-Gypsy
+Medieval Europe | 48.0, 5.0 | Europe; Marie de France
+Aesop | 38.0, 23.7 | Babrius; Avianus; Anianus; Attributed to Aesop

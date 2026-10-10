@@ -145,8 +145,8 @@ def main():
                      s.get("pdf_page_start"), s.get("printed_page_start"), chapter,
                      pretty(s["subsection_id"]) if s.get("subsection_id") else None, s.get("contributor"),
                      e.get("interpretation_status"), e.get("cultural_context")))
-        if e.get("cultural_context") and slug:
-            add_to_list(con, slug, "cultures", [e["cultural_context"].split(" (")[0].split(",")[0]])
+        if e.get("cultural_context") and slug and "Ndembu" in e["cultural_context"]:
+            add_to_list(con, slug, "cultures", ["Ndembu (Zambia)"])
         # a book theme with the same name as one of ours tags the entry, credited to the book
         for t in e.get("themes", []):
             tid = theme_names.get(norm(t.replace("_", " ")))

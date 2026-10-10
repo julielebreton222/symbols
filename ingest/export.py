@@ -50,6 +50,34 @@ def load_cultures():
     return canon, drop
 
 
+def load_places():
+    places = {}
+    for line in open(os.path.join(ROOT, "content", "places.txt"), encoding="utf-8"):
+        line = line.strip()
+        if not line or line.startswith("#"):
+            continue
+        f = [x.strip() for x in line.split("|")]
+        ll = [float(x) for x in f[1].split(",")]
+        for n in [f[0]] + [a.strip() for a in (f[2].split(";") if len(f) > 2 else []) if a.strip()]:
+            places[n.lower()] = (f[0], ll)
+    return places
+
+
+def place_of(text, places):
+    t = (text or "").strip().lower()
+    if not t:
+        return None
+    if t in places:
+        return places[t]
+    for part in re.split(r"\s*(?:/|,|\(|\)|—| and )\s*", t):
+        if part and part in places:
+            return places[part]
+    for name, v in places.items():  # a known name inside a longer label
+        if len(name) > 4 and re.search(r"\b" + re.escape(name) + r"\b", t):
+            return v
+    return None
+
+
 def short(text, n=240):
     text = re.sub(r"\s+", " ", text or "").strip()
     if len(text) <= n:
@@ -127,6 +155,27 @@ def main():
     for r in con.execute("SELECT * FROM sections ORDER BY slug, kind, ord"):
         secs.setdefault(r["slug"], {}).setdefault(r["kind"], []).append({"h": r["heading"], "html": r["html"], "src": json.loads(r["sources"])})
 
+    # Wikipedia's article, section by section (ingest/wiki_articles.py)
+    wsecs = {}
+    try:
+        for r in con.execute("SELECT * FROM wiki_sections ORDER BY slug, ord"):
+            wsecs.setdefault(r["slug"], []).append({"l": r["level"], "h": r["heading"], "t": r["text"], "src": r["src"], "mode": r["mode"]})
+    except Exception:
+        pass
+    # journeys: the card's own lines, the first appearance, and the tales
+    places = load_places()
+    card_j = {}
+    for r in con.execute("SELECT * FROM journeys ORDER BY slug, ord"):
+        card_j.setdefault(r["slug"], []).append({"y": r["year"], "place": r["place"], "ll": [r["lat"], r["lon"]], "text": r["text"], "kind": "card"})
+    tale_j = {}
+    base = "https://julielebreton222.github.io/fairies/#/c/"
+    for r in con.execute("SELECT slug, page, story, title, year, region, origin FROM tale_mentions WHERE page != '' AND year IS NOT NULL ORDER BY year"):
+        pl = place_of(r["region"], places) or place_of(r["origin"], places)
+        if not pl:
+            continue
+        tale_j.setdefault(r["slug"], []).append({"y": r["year"], "place": pl[0], "ll": pl[1], "text": r["title"], "kind": "tale",
+                                                 "link": f"#/tale/{r['page']}/{r['story']}"})
+
     index, cards = [], [dict() for _ in range(BUCKETS)]
     culture_use = {}
     for r in con.execute("SELECT * FROM entries ORDER BY title COLLATE NOCASE"):
@@ -157,7 +206,18 @@ def main():
             "rb": sorted({x["b"] for x in refs.get(s, [])}),
             "rt": sorted({t for x in refs.get(s, []) for t in x["th"]}),
         })
+        journey = list(card_j.get(s, []))
+        if r["first_year"] is not None and ll and not any(j["y"] == r["first_year"] for j in journey):
+            journey.append({"y": r["first_year"], "place": r["region"] or (cultures[0] if cultures else ""), "ll": ll,
+                            "text": "First appears" + (": " + re.sub(r"^.*?:\s*", "", r["first_label"] or "").replace("*", "") if r["first_label"] else ""), "kind": "first"})
+        tj = tale_j.get(s, [])
+        if len(tj) > 40:  # keep the earliest and a spread of the rest
+            step = len(tj) / 40
+            tj = [tj[int(i * step)] for i in range(40)]
+        journey = sorted(journey + tj, key=lambda j: j["y"])
         used_src = set()
+        for x in wsecs.get(s, []):
+            used_src.add(x["src"])
         for kind in secs.get(s, {}).values():
             for x in kind:
                 used_src.update(x["src"])
@@ -188,6 +248,7 @@ def main():
             "conn": conns.get(s, []), "images": im, "themes": th,
             "tales": tales.get(s, []), "tales_total": tale_total.get(s, len(tales.get(s, []))),
             "passages": passages.get(s, []), "facts": facts.get(s, []), "refs": refs.get(s, []),
+            "wiki_secs": wsecs.get(s, []), "journey": journey,
         }
 
     cultures_out = {}

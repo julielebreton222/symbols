@@ -44,7 +44,7 @@ def main():
                 continue
             tales.append({"page": p["slug"], "story": s["id"], "title": s["title"], "origin": s.get("origin") or s.get("region") or "",
                           "year": s.get("earliest") or s.get("sourceYear"), "kind": ", ".join(s.get("kinds", [])),
-                          "pd": p.get("kind") == "book", "text": t, "low": t.lower(), "title_low": s["title"].lower()})
+                          "pd": p.get("kind") == "book", "region": s.get("region") or "", "text": t, "low": t.lower(), "title_low": s["title"].lower()})
     con = db()
     con.execute("DELETE FROM tale_mentions")
     n_entries = n_rows = 0
@@ -75,12 +75,12 @@ def main():
                 z = len(t["text"]) if z < 0 else z
                 snippet = ("… " if a else "") + t["text"][a:z] + (" …" if z < len(t["text"]) else "")
             hits = len([1 for rx, _ in pairs for _ in rx.finditer(t["text"])])
-            con.execute("INSERT OR REPLACE INTO tale_mentions VALUES (?,?,?,?,?,?,?,?,?)",
-                        (r["slug"], t["page"], t["story"], t["title"], t["origin"], t["year"], t["kind"], hits, snippet))
+            con.execute("INSERT OR REPLACE INTO tale_mentions VALUES (?,?,?,?,?,?,?,?,?,?)",
+                        (r["slug"], t["page"], t["story"], t["title"], t["origin"], t["year"], t["kind"], hits, snippet, t["region"]))
             n_rows += 1
         if len(found) > MAX_TALES:
-            con.execute("INSERT OR REPLACE INTO tale_mentions VALUES (?,?,?,?,?,?,?,?,?)",
-                        (r["slug"], "", "", "", "", None, "", len(found), None))  # total count marker
+            con.execute("INSERT OR REPLACE INTO tale_mentions VALUES (?,?,?,?,?,?,?,?,?,?)",
+                        (r["slug"], "", "", "", "", None, "", len(found), None, None))  # total count marker
     log(con, "tales", f"{len(tales)} tales read; {n_rows} tale links for {n_entries} entries")
     con.commit()
 

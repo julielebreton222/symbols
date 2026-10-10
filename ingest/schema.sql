@@ -56,7 +56,12 @@ CREATE TABLE IF NOT EXISTS images (
 
 CREATE TABLE IF NOT EXISTS tale_mentions (   -- from the Fairies library
   slug TEXT, page TEXT, story TEXT, title TEXT, origin TEXT, year INTEGER, kind TEXT,
-  hits INTEGER, snippet TEXT, PRIMARY KEY (slug, page, story)
+  hits INTEGER, snippet TEXT, region TEXT, PRIMARY KEY (slug, page, story)
+);
+
+CREATE TABLE IF NOT EXISTS journeys (        -- a card's ## Journey: where and when it appears
+  slug TEXT, ord INTEGER, year INTEGER, place TEXT, lat REAL, lon REAL, text TEXT, src TEXT,
+  PRIMARY KEY (slug, ord)
 );
 
 CREATE TABLE IF NOT EXISTS passages (        -- public-domain books

@@ -244,7 +244,7 @@ window.APP = (function () {
   };
 
   /* ---------------- the card ---------------- */
-  const SECTION_ORDER = [['overview', 'Overview'], ['myth', 'Myth & Origin'], ['lifetime', 'Lifetime'], ['today', 'Today'],
+  const SECTION_ORDER = [['overview', 'Overview'], ['encyclopedia', 'From the encyclopedia'], ['myth', 'Myth & Origin'], ['lifetime', 'Lifetime'], ['journey', 'Journey'], ['today', 'Today'],
     ['seen', 'How it was seen'], ['readings', 'What the books say'], ['debates', 'Debates'], ['article', 'Article'], ['tales', 'In the tales'], ['books', 'In the old books'],
     ['deeper', 'Go deeper'], ['connections', 'Connections'], ['images', 'Images'], ['sources', 'Sources'], ['mine', 'My notes']];
   const ERA_NAMES = { ancient: 'Ancient', medieval: 'Medieval', 'early modern': 'Early modern', modern: 'Modern' };
@@ -273,7 +273,7 @@ window.APP = (function () {
       if (c.overview) o += `<p>${esc(c.overview)}${srcRef(c.overview_src)}</p>`;
       if (c.list_note) o += `<p>${esc(c.list_note)}${srcRef(c.list_src)}</p>`;
       if (c.wiki && c.wiki.role === 'context') o += `<p class="m">It has no Wikipedia article of its own; it is told of in the article on <a href="${esc(c.wiki.url)}" target="_blank" rel="noopener">${esc(c.wiki.title)}</a>.</p>`;
-      o += `<div class="stubnote">This is a <b>stub</b>: a summary from the sources named below. Its myth, history, interpretations and debates will be written in a later batch.${e.n[0] || e.n[1] ? ' Meanwhile, see where it appears in the tales and the old books below.' : ''}</div>`;
+      o += `<div class="stubnote">Not yet written up as a full card. Below: ${[(c.wiki_secs || []).length ? 'the encyclopedia article in brief' : '', (c.refs || []).length ? 'what the reference books say' : '', e.n[0] ? 'the tales it appears in' : '', e.n[1] ? 'passages from the old books' : '', (c.journey || []).length ? 'its journey across the world' : ''].filter(Boolean).join(', ') || 'its sources'}.</div>`;
       parts.overview = o;
     }
     if (c.facts && c.facts.length) {
@@ -281,6 +281,25 @@ window.APP = (function () {
       for (const f of c.facts) (g[f.p] = g[f.p] || []).push(f.v);
       parts.overview += `<h3>Facts</h3><dl class="facts">${Object.entries(g).map(([p, v]) => `<dt>${esc(p)}</dt><dd>${[...new Set(v)].map(x => `<a href="#/fact/${encodeURIComponent(p)}/${encodeURIComponent(x)}">${esc(x)}</a>`).join(', ')}</dd>`).join('')}</dl>
         <div class="srcnote">From Wikidata (CC0)${srcRef('wd:' + c.qid)}</div>`;
+    }
+    // From the encyclopedia: Wikipedia's article, section by section, trimmed
+    if (c.wiki_secs && c.wiki_secs.length) {
+      const ws = c.wiki_secs, ctx = ws[0].mode === 'context';
+      const paras = t => t.split(/\n\n+/).map(p => `<p>${esc(p)}</p>`).join('');
+      parts.encyclopedia = (ctx ? `<p class="m small">It has no article of its own; these passages come from Wikipedia’s article on <a href="${esc(c.wiki.url)}" target="_blank" rel="noopener">${esc(c.wiki.title)}</a>.</p>` : '') +
+        ws.map(x => (x.h ? `<h${Math.min(5, x.l + 1)} class="wsec">${esc(x.h)}</h${Math.min(5, x.l + 1)}>` : '') + (x.t ? paras(x.t) : '')).join('') +
+        `<div class="srcnote">From Wikipedia (CC BY-SA 4.0), shortened: each section's opening only.${srcRef(ws[0].src)} <a href="${esc(c.wiki.url)}" target="_blank" rel="noopener">Read the whole article ↗</a></div>`;
+    }
+    // Journey: where and when it appears
+    if (c.journey && c.journey.length) {
+      const fb = await fairiesBase();
+      const J = c.journey.map(j => j.link && j.link.startsWith('#/tale/') ? { ...j, link: fb + '#/c/' + j.link.slice(7) } : j);
+      c.journey = J;
+      const kinds = { card: '✦', first: '◆', tale: '❦' };
+      parts.journey = `<p class="m small">Where and when it appears${J.some(j => j.kind === 'tale') ? ', including the tales of the Fairies library' : ''}. ✦ written on this card · ❦ a tale · ◆ first appearance.</p>
+        <div id="minimap" style="height:16rem;border:1px solid var(--line);border-radius:5px;margin:.5rem 0"></div>
+        <ul class="list journey">${J.map(j => `<li><b>${esc(yearLabel(j.y))}</b> ${kinds[j.kind] || ''} <span class="m">${esc(j.place || '')}</span> — ${j.link ? `<a href="${esc(j.link)}"${j.link.startsWith('http') ? ' target="_blank" rel="noopener"' : ''}>${esc(j.text)}</a>` : esc(j.text)}</li>`).join('')}</ul>
+        <p class="small"><a href="#/map?j=${slug}">Follow its journey on the big map</a> · compare it with others there.</p>`;
     }
     // Myth & origin
     if (secs.myth || c.first) parts.myth = (c.first ? `<p class="firstline">First appears: ${esc(c.first)}</p>` : '') + block(secs.myth);
@@ -356,7 +375,7 @@ window.APP = (function () {
       const same = D.entries().filter(x => x.s !== slug && !linked.has(x.s) && x.st === 'full' && x.th.some(t => myThemes.includes(t)));
       if (same.length) ch += `<h3>Shares a theme</h3><div class="chips">${same.slice(0, 16).map(x => `<a class="chip" href="#/e/${x.s}">${esc(x.t)}</a>`).join('')}</div>`;
     }
-    if (ch) parts.connections = ch + `<p class="small"><a href="#/graph?focus=${slug}">See its web of connections</a></p>`;
+    parts.connections = ch + `<div id="my-links"></div><p class="small"><a href="#/graph?focus=${slug}">See its web of connections</a></p>`;
     // Images
     if (c.images && c.images.length) parts.images = `<div class="gallery">${c.images.map(im => `<figure><a href="${esc(im.page_url)}" target="_blank" rel="noopener"><img loading="lazy" src="${esc(thumb(im.thumb, 330))}" alt="${esc(e.t)}"></a>
       <figcaption>${esc(im.author || 'Unknown author')} · <a href="${esc(im.license_url || im.page_url)}" target="_blank" rel="noopener">${esc(im.license)}</a> · via Wikimedia Commons</figcaption></figure>`).join('')}</div>`;
@@ -368,11 +387,15 @@ window.APP = (function () {
     parts.mine = '<div id="mine-box"><p class="m">Loading your notes…</p></div>';
 
     const hero = (c.images || [])[0];
+    // related at a glance: hand-written and book links first, then the rest
+    const rank = { card: 0, book: 1, wikidata: 2, wikipedia: 3 };
+    const related = [...new Map((c.conn || []).slice().sort((a, b) => (rank[a.origin] ?? 9) - (rank[b.origin] ?? 9))
+      .map(x => [x.to, D.get(x.to)]).filter(([, v]) => v)).values()].slice(0, 12);
     const present = SECTION_ORDER.filter(([k]) => parts[k]);
     setPage(`
       <div class="card-head">
         <div class="cats">${catBadges(e)}${e.st === 'full' ? ' <span class="cat" style="background:var(--gold)">full card</span>' : ''}</div>
-        <h1>${esc(e.t)}</h1>
+        <h1>${esc(e.t)} <button class="star" id="favstar" title="Favourite" aria-label="Favourite">☆</button></h1>
         ${e.a.length ? `<div class="aka">also ${esc(e.a.join(' · '))}</div>` : ''}
         <div class="chips" style="justify-content:center">
           ${[...e.cu, ...(e.tr || []).filter(t => !e.cu.includes(t))].map(x => `<a class="chip" href="#/browse?culture=${encodeURIComponent(x)}">${esc(x)}</a>`).join('')}
@@ -382,6 +405,7 @@ window.APP = (function () {
           ${(e.ow || []).filter(o => o.toLowerCase() !== e.t.toLowerCase()).map(o => `<a class="chip" href="#/owner/${encodeURIComponent(o)}" title="Everything that belongs to ${esc(o)}">✋ ${esc(o)}</a>`).join('')}
           ${e.g.map(g => `<a class="chip" href="#/browse?group=${encodeURIComponent(g)}" title="Group">${esc(g)}</a>`).join('')}
         </div>
+        ${related.length ? `<div class="related"><span class="m small">Related:</span> ${related.map(x => `<a class="chip" href="#/e/${x.s}">${esc(x.t)}</a>`).join('')}</div>` : ''}
       </div>
       ${hero ? `<figure class="hero"><img src="${esc(thumb(hero.thumb, 500))}" alt="${esc(e.t)}"><figcaption>${esc(hero.author || '')} · ${esc(hero.license)} · <a href="${esc(hero.page_url)}" target="_blank" rel="noopener">Wikimedia Commons</a></figcaption></figure>` : ''}
       <nav class="toc">${present.map(([k, l]) => `<a href="#/e/${slug}" data-sec="${k}">${l}</a>`).join(' · ')}</nav>
@@ -391,6 +415,15 @@ window.APP = (function () {
     for (const a of app().querySelectorAll('.toc a')) a.onclick = ev => { ev.preventDefault(); document.getElementById('sec-' + a.dataset.sec).scrollIntoView({ behavior: 'smooth' }); };
     for (const a of app().querySelectorAll('sup.src a, a[href^="#src-"]')) a.onclick = ev => { ev.preventDefault(); const t = document.getElementById(a.getAttribute('href').slice(1)); if (t) t.scrollIntoView({ behavior: 'smooth', block: 'center' }); };
     if (views.mineBox) views.mineBox(slug, document.getElementById('mine-box'));
+    if (views.myLinks) views.myLinks(slug, document.getElementById('my-links'));
+    if (views.miniJourney && c.journey && c.journey.length) views.miniJourney(document.getElementById('minimap'), c.journey);
+    const star = document.getElementById('favstar');
+    const paint = on => { star.textContent = on ? '★' : '☆'; star.classList.toggle('on', !!on); star.title = on ? 'A favourite (tap to remove)' : 'Add to favourites'; };
+    paint(await S.get('favorites', slug));
+    star.onclick = async () => {
+      if (await S.get('favorites', slug)) { await S.del('favorites', slug); paint(false); toast('Removed from favourites'); }
+      else { await S.put('favorites', { slug, added: S.now() }); paint(true); toast('Added to favourites'); }
+    };
   };
 
   /* ---------------- about ---------------- */

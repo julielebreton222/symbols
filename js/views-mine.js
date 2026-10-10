@@ -31,6 +31,8 @@
     return () => chosen.slice();
   }
 
+  A.picker = picker;
+
   /* ---------- shrink photos before saving ---------- */
   async function shrink(file, max = 1600) {
     try {
@@ -43,17 +45,43 @@
     } catch (e) { return file; }
   }
 
+  /* ---------- her own links between cards ---------- */
+  const MY_TYPES = { 'my-link': 'My link', ...D.LINK_TYPES };
+  A.register('myLinks', async function (slug, box) {
+    if (!box) return;
+    const mine = (await S.all('links')).filter(l => (l.slugs || []).includes(slug));
+    box.innerHTML = `<h3>My links</h3>
+      ${mine.map(l => `<div class="c mylink"><span class="ltype">${esc(MY_TYPES[l.type] || l.type)}</span> ${chipsFor(l.slugs.filter(s => s !== slug))}
+        ${l.note ? `<span class="why">${esc(l.note)}</span>` : ''} <button class="btn small" data-del="${l.id}">Remove</button></div>`).join('') || '<p class="m small">None yet: link this card to others that belong with it.</p>'}
+      <details><summary class="small">+ Link this card to others</summary>
+        <div class="field"><label>Cards to link with it (one or more)</label><div id="lpick"></div></div>
+        <div class="row"><select id="ltype">${Object.entries(MY_TYPES).map(([k, v]) => `<option value="${k}">${esc(v)}</option>`).join('')}</select>
+          <input type="text" id="lnote" class="grow" placeholder="Why they belong together"></div>
+        <button class="btn primary small" id="lsave">Save link</button></details>`;
+    const get = picker(box.querySelector('#lpick'), []);
+    box.querySelector('#lsave').onclick = async () => {
+      const others = get();
+      if (!others.length) { toast('Choose at least one other card'); return; }
+      await S.put('links', { id: S.uid(), slugs: [slug, ...others], type: box.querySelector('#ltype').value, note: box.querySelector('#lnote').value.trim(), added: S.now() });
+      toast('Link saved'); A.views.myLinks(slug, box);
+    };
+    for (const b of box.querySelectorAll('[data-del]')) b.onclick = async () => { if (confirm('Remove this link?')) { await S.del('links', b.dataset.del); A.views.myLinks(slug, box); } };
+  });
+
   /* ---------- the box at the end of every card ---------- */
   A.register('mineBox', async function (slug, box) {
-    const [note, seed, fav, cols, hls, sights, dreams] = await Promise.all([S.get('notes', slug), S.get('seeds', slug), S.get('favorites', slug),
-      S.all('collections'), S.all('highlights'), S.all('sightings'), S.all('dreams')]);
+    const [note, seed, fav, cols, hls, sights, dreams, projects] = await Promise.all([S.get('notes', slug), S.get('seeds', slug), S.get('favorites', slug),
+      S.all('collections'), S.all('highlights'), S.all('sightings'), S.all('dreams'), S.all('projects')]);
+    projects.sort((a, b) => a.name.localeCompare(b.name));
     const myH = hls.filter(h => (h.slugs || []).includes(slug)), myS = sights.filter(h => (h.slugs || []).includes(slug)), myD = dreams.filter(h => (h.slugs || []).includes(slug));
     box.innerHTML = `
       <div class="row"><button class="btn small" id="fav">${fav ? '★ A favourite' : '☆ Favourite'}</button>
         <button class="btn small" id="seed">${seed ? '✒ A story seed' : '✒ Mark as a story seed'}</button>
         <select id="col"><option value="">Add to a collection…</option>${cols.map(c => `<option value="${c.id}">${esc(c.name)}${(c.slugs || []).includes(slug) ? ' ✓' : ''}</option>`).join('')}<option value="+">New collection…</option></select></div>
       <div class="field"><label>My notes <span class="saved" id="saved"></span></label><textarea id="note" placeholder="Your thoughts on this card…">${esc(note ? note.text : '')}</textarea></div>
-      <div class="field" id="seedbox" ${seed ? '' : 'hidden'}><label>Story seed: how might it live in your fiction?</label><textarea id="seednote">${esc(seed ? seed.notes || '' : '')}</textarea></div>
+      <div class="field" id="seedbox" ${seed ? '' : 'hidden'}><label>Story seed: how might it live in your fiction?</label><textarea id="seednote">${esc(seed ? seed.notes || '' : '')}</textarea>
+        <div class="chips" id="projchips">${projects.map(p => `<button class="chip${seed && (seed.projects || []).includes(p.id) ? ' on' : ''}" data-p="${p.id}">📁 ${esc(p.name)}</button>`).join('')}
+        <button class="chip" id="newproj">+ New book</button></div><div class="m small">Put it in one or more of your books.</div></div>
       <div class="row small"><a href="#/mine/highlights?add=${slug}">+ Highlight from a book</a> · <a href="#/mine/sightings?add=${slug}">+ Sighting</a> · <a href="#/mine/dreams?add=${slug}">+ Dream</a></div>
       ${myH.length ? `<h3>My highlights</h3>${myH.map(h => `<blockquote>${esc(h.quote)}<div class="m small">${esc(h.book || '')}${h.page ? ', p. ' + esc(h.page) : ''}</div></blockquote>`).join('')}` : ''}
       ${myS.length ? `<h3>My sightings</h3><div class="gallery">${myS.map(x => `<figure>${x.photo ? `<img src="${blobURL(x.photo)}" alt="">` : ''}<figcaption>${esc(x.place || '')} · ${fmtDate(x.date)}</figcaption></figure>`).join('')}</div>` : ''}
@@ -66,7 +94,22 @@
     };
     box.querySelector('#seednote').oninput = ev => {
       clearTimeout(t);
-      t = setTimeout(async () => { await S.put('seeds', { slug, notes: ev.target.value, updated: S.now() }); saved.textContent = 'saved'; }, 500);
+      t = setTimeout(async () => { const sd = (await S.get('seeds', slug)) || { slug, projects: [] }; sd.notes = ev.target.value; sd.updated = S.now(); await S.put('seeds', sd); saved.textContent = 'saved'; }, 500);
+    };
+    for (const b of box.querySelectorAll('[data-p]')) b.onclick = async () => {
+      const sd = (await S.get('seeds', slug)) || { slug, notes: '', projects: [] };
+      sd.projects = sd.projects || [];
+      const i = sd.projects.indexOf(b.dataset.p);
+      if (i >= 0) sd.projects.splice(i, 1); else sd.projects.push(b.dataset.p);
+      sd.updated = S.now(); await S.put('seeds', sd); b.classList.toggle('on', i < 0);
+    };
+    box.querySelector('#newproj').onclick = async () => {
+      const name = prompt('Name of your book (a novel, a story, a collection…)');
+      if (!name) return;
+      const id = S.uid(); await S.put('projects', { id, name, about: '', added: S.now() });
+      const sd = (await S.get('seeds', slug)) || { slug, notes: '', projects: [] };
+      sd.projects = [...(sd.projects || []), id]; sd.updated = S.now(); await S.put('seeds', sd);
+      A.views.mineBox(slug, box);
     };
     box.querySelector('#fav').onclick = async ev => {
       if (await S.get('favorites', slug)) { await S.del('favorites', slug); ev.target.textContent = '☆ Favourite'; }
@@ -74,7 +117,7 @@
     };
     box.querySelector('#seed').onclick = async ev => {
       if (await S.get('seeds', slug)) { await S.del('seeds', slug); ev.target.textContent = '✒ Mark as a story seed'; box.querySelector('#seedbox').hidden = true; }
-      else { await S.put('seeds', { slug, notes: '', updated: S.now() }); ev.target.textContent = '✒ A story seed'; box.querySelector('#seedbox').hidden = false; }
+      else { await S.put('seeds', { slug, notes: '', projects: [], updated: S.now() }); ev.target.textContent = '✒ A story seed'; box.querySelector('#seedbox').hidden = false; }
     };
     box.querySelector('#col').onchange = async ev => {
       let id = ev.target.value;
@@ -94,15 +137,15 @@
 
   /* ---------- My book ---------- */
   const TABS = [['', 'Overview'], ['notes', 'Notes'], ['highlights', 'Highlights'], ['sightings', 'Sightings'], ['dreams', 'Dream log'],
-    ['seeds', 'Story seeds'], ['reading', 'Reading'], ['collections', 'Collections'], ['favorites', 'Favourites'], ['backup', 'Back up']];
+    ['seeds', 'Story seeds'], ['links', 'My links'], ['reading', 'Reading'], ['collections', 'Collections'], ['favorites', 'Favourites'], ['backup', 'Back up']];
   const tabs = cur => `<h1>My book</h1><div class="tabs">${TABS.map(([k, l]) => `<a class="chip${k === cur ? ' on' : ''}" href="#/mine${k ? '/' + k : ''}">${l}</a>`).join('')}</div>`;
 
   A.register('mine', async function (args, query) {
     const sub = args[0] || '';
-    const fn = { notes, highlights, sightings, dreams, seeds, reading, collections, favorites, backup }[sub];
+    const fn = { notes, highlights, sightings, dreams, seeds, links, reading, collections, favorites, backup }[sub];
     if (fn) return fn(query, args.slice(1));
     const counts = {};
-    for (const k of ['notes', 'highlights', 'sightings', 'dreams', 'seeds', 'reading', 'collections', 'favorites', 'seen']) counts[k] = (await S.all(k)).length;
+    for (const k of ['notes', 'highlights', 'sightings', 'dreams', 'seeds', 'projects', 'links', 'reading', 'collections', 'favorites', 'seen']) counts[k] = (await S.all(k)).length;
     setPage(tabs('') + `
       <p class="center m">Everything here is yours and is kept only on this device. Back it up from time to time.</p>
       <div class="tiles">
@@ -110,10 +153,11 @@
         <a class="tile" href="#/mine/highlights"><b>Highlights</b><span>${plural(counts.highlights, 'quote')} from your books</span></a>
         <a class="tile" href="#/mine/sightings"><b>Sightings</b><span>${plural(counts.sightings, 'symbol')} spotted in the world</span></a>
         <a class="tile" href="#/mine/dreams"><b>Dream log</b><span>${plural(counts.dreams, 'dream')}</span></a>
-        <a class="tile" href="#/mine/seeds"><b>Story seeds</b><span>${plural(counts.seeds, 'object')} marked for your fiction</span></a>
+        <a class="tile" href="#/mine/seeds"><b>Story seeds</b><span>${plural(counts.seeds, 'object')} marked for your fiction, in ${plural(counts.projects, 'book')}</span></a>
+        <a class="tile" href="#/mine/links"><b>My links</b><span>${plural(counts.links, 'link')} you made between cards</span></a>
         <a class="tile" href="#/mine/reading"><b>Reading</b><span>${plural(counts.reading, 'book')} tracked</span></a>
         <a class="tile" href="#/mine/collections"><b>Collections</b><span>${plural(counts.collections, 'collection')}</span></a>
-        <a class="tile" href="#/mine/favorites"><b>Favourites</b><span>${counts.favorites}</span></a>
+        <a class="tile" href="#/mine/favorites"><b>Favourites</b><span>${counts.favorites} · tap ☆ on any card</span></a>
         <a class="tile" href="#/mine/backup"><b>Back up &amp; settings</b><span>${plural(counts.seen, 'card')} opened so far</span></a>
       </div>`);
   });
@@ -223,17 +267,72 @@
     };
   }
 
-  async function seeds() {
-    const list = (await S.all('seeds')).filter(s => D.get(s.slug)).sort((a, b) => b.updated.localeCompare(a.updated));
-    setPage(tabs('seeds') + `<p class="center m">Objects and symbols marked for your fiction. Mark one from the “My notes” box of any card.</p>
-      <div class="leaf">${list.length ? list.map(s => { const e = D.get(s.slug); return `<div class="item"><b>${A.entryLink(s.slug)}</b> <span class="m small">${esc(e.cu.slice(0, 2).join(' · '))}</span>
-        <div class="m small">${esc(e.o)}</div>${s.notes ? `<p style="white-space:pre-wrap">${esc(s.notes)}</p>` : ''}</div>`; }).join('') : '<p class="center m">No story seeds yet.</p>'}</div>
-      ${list.length > 1 ? `<p class="center"><button class="btn" id="spark">Draw three seeds for a story</button></p><div id="sparkbox"></div>` : ''}`);
+  async function seeds(query, rest) {
+    const [all, projects] = await Promise.all([S.all('seeds'), S.all('projects')]);
+    const list = all.filter(sd => D.get(sd.slug)).sort((a, b) => (b.updated || '').localeCompare(a.updated || ''));
+    projects.sort((a, b) => a.name.localeCompare(b.name));
+    const open = rest && rest[0];
+    const proj = open && open !== 'unfiled' ? projects.find(p => p.id === open) : null;
+    const shown = open === 'unfiled' ? list.filter(sd => !(sd.projects || []).length) : proj ? list.filter(sd => (sd.projects || []).includes(proj.id)) : list;
+    const row = sd => { const e = D.get(sd.slug); return `<div class="item"><b>${A.entryLink(sd.slug)}</b> <span class="m small">${esc(e.cu.slice(0, 2).join(' · '))}</span>
+      <div class="chips">${projects.map(p => `<button class="chip${(sd.projects || []).includes(p.id) ? ' on' : ''}" data-s="${sd.slug}" data-p="${p.id}">📁 ${esc(p.name)}</button>`).join('')}</div>
+      <div class="m small">${esc(e.o)}</div>${sd.notes ? `<p style="white-space:pre-wrap">${esc(sd.notes)}</p>` : ''}</div>`; };
+    setPage(tabs('seeds') + `
+      <p class="center m">Objects and symbols marked for your fiction, filed in folders for each of your books. A seed can live in several books. Mark one from the “My notes” box of any card.</p>
+      <div class="tiles">
+        <a class="tile${!open ? ' on' : ''}" href="#/mine/seeds"><b>All seeds</b><span>${list.length}</span></a>
+        ${projects.map(p => `<a class="tile" href="#/mine/seeds/${p.id}"><b>📁 ${esc(p.name)}</b><span>${list.filter(sd => (sd.projects || []).includes(p.id)).length} seeds</span></a>`).join('')}
+        <a class="tile" href="#/mine/seeds/unfiled"><b>Not in a book yet</b><span>${list.filter(sd => !(sd.projects || []).length).length}</span></a>
+      </div>
+      <div class="leaf row"><input type="text" id="pname" class="grow" placeholder="New book (folder) name"><button class="btn primary" id="pnew">Create</button></div>
+      ${proj ? `<div class="leaf"><h2>📁 ${esc(proj.name)}</h2>
+        <div class="field"><label>About this book</label><textarea id="pabout" style="min-height:3rem">${esc(proj.about || '')}</textarea></div>
+        <div class="row"><button class="btn small" id="psave">Save</button><button class="btn small" id="pren">Rename</button><button class="btn small" id="pdel">Delete folder</button>
+        <span class="m small">Deleting a folder keeps the seeds.</span></div></div>` : ''}
+      <div class="leaf">${shown.length ? shown.map(row).join('') : '<p class="center m">No story seeds here yet.</p>'}</div>
+      ${shown.length > 1 ? `<p class="center"><button class="btn" id="spark">Draw three seeds for a story</button></p><div id="sparkbox"></div>` : ''}`);
+    document.getElementById('pnew').onclick = async () => {
+      const name = document.getElementById('pname').value.trim(); if (!name) return;
+      const id = S.uid(); await S.put('projects', { id, name, about: '', added: S.now() }); location.hash = '#/mine/seeds/' + id;
+    };
+    for (const b of document.querySelectorAll('[data-p][data-s]')) b.onclick = async () => {
+      const sd = await S.get('seeds', b.dataset.s); sd.projects = sd.projects || [];
+      const i = sd.projects.indexOf(b.dataset.p); if (i >= 0) sd.projects.splice(i, 1); else sd.projects.push(b.dataset.p);
+      sd.updated = S.now(); await S.put('seeds', sd); b.classList.toggle('on', i < 0);
+    };
+    if (proj) {
+      document.getElementById('psave').onclick = async () => { proj.about = document.getElementById('pabout').value; await S.put('projects', proj); toast('Saved'); };
+      document.getElementById('pren').onclick = async () => { const n = prompt('New name', proj.name); if (n) { proj.name = n; await S.put('projects', proj); seeds(query, rest); } };
+      document.getElementById('pdel').onclick = async () => { if (confirm(`Delete the folder “${proj.name}”? The seeds stay.`)) {
+        for (const sd of list) if ((sd.projects || []).includes(proj.id)) { sd.projects = sd.projects.filter(x => x !== proj.id); await S.put('seeds', sd); }
+        await S.del('projects', proj.id); location.hash = '#/mine/seeds'; } };
+    }
     const sp = document.getElementById('spark');
     if (sp) sp.onclick = () => {
-      const three = list.slice().sort(() => Math.random() - .5).slice(0, 3).map(s => D.get(s.slug));
+      const three = shown.slice().sort(() => Math.random() - .5).slice(0, 3).map(sd => D.get(sd.slug));
       document.getElementById('sparkbox').innerHTML = `<ul class="entries">${three.map(A.entryTile).join('')}</ul><p class="center m">Who carries them, who wants them, and what does it cost?</p>`;
     };
+  }
+
+  async function links() {
+    const list = (await S.all('links')).sort((a, b) => (b.added || '').localeCompare(a.added || ''));
+    setPage(tabs('links') + `
+      <div class="leaf"><h2>Make a link</h2><p class="m small">Connect two or more cards in your own way. Your links appear on each card and in the web.</p>
+        <div class="field"><label>Cards</label><div id="pick"></div></div>
+        <div class="row"><select id="ltype">${Object.entries(MY_TYPES).map(([k, v]) => `<option value="${k}">${esc(v)}</option>`).join('')}</select>
+          <input type="text" id="lnote" class="grow" placeholder="Why they belong together"></div>
+        <button class="btn primary" id="save">Save link</button></div>
+      <h2 class="orn">Your links</h2>
+      <div class="leaf">${list.map(l => `<div class="item"><span class="ltype">${esc(MY_TYPES[l.type] || l.type)}</span> <div class="chips">${chipsFor(l.slugs)}</div>
+        ${l.note ? `<p>${esc(l.note)}</p>` : ''}<button class="btn small" data-del="${l.id}">Remove</button></div>`).join('') || '<p class="center m">No links yet.</p>'}</div>
+      ${list.length ? '<p class="center"><a class="btn" href="#/graph?mine=1">See your links as a web</a></p>' : ''}`);
+    const get = picker(document.getElementById('pick'), []);
+    document.getElementById('save').onclick = async () => {
+      const slugs = get(); if (slugs.length < 2) { toast('Choose at least two cards'); return; }
+      await S.put('links', { id: S.uid(), slugs, type: document.getElementById('ltype').value, note: document.getElementById('lnote').value.trim(), added: S.now() });
+      links();
+    };
+    for (const b of document.querySelectorAll('[data-del]')) b.onclick = async () => { if (confirm('Remove this link?')) { await S.del('links', b.dataset.del); links(); } };
   }
 
   async function reading() {
