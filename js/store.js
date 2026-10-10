@@ -3,11 +3,13 @@
  * "Back up" in My book saves it all (photos included) as one file; "Restore"
  * reads that file on another device. */
 window.STORE = (function () {
-  const DB = 'symbols-book', VERSION = 1;
+  const DB = 'symbols-book', VERSION = 2;
   // store name -> key path
   const STORES = {
     notes: 'slug',        // My notes on a card
-    seeds: 'slug',        // Story seeds: objects marked for fiction
+    seeds: 'slug',        // Story seeds: objects marked for fiction ({slug, notes, projects: [ids]})
+    projects: 'id',       // her own books: folders for story seeds
+    links: 'id',          // her own connections between two or more cards
     favorites: 'slug',
     collections: 'id',    // her own groupings
     highlights: 'id',     // quotes she types from books she owns
