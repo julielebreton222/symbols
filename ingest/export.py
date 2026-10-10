@@ -101,6 +101,9 @@ def main():
     for r in con.execute("SELECT * FROM images ORDER BY slug, ord"):
         d = {k: r[k] for k in ("file", "page_url", "thumb", "license", "license_url", "author", "credit")}
         d["thumb"] = (d["thumb"] or "").split("?")[0]
+        a = d["author"] or ""
+        if len(a) % 2 == 0 and a[:len(a) // 2] == a[len(a) // 2:]:
+            d["author"] = a[:len(a) // 2]  # Commons sometimes repeats the name
         imgs.setdefault(r["slug"], []).append(d)
     # owners: Wikidata "owned by", else a context article about a person or god
     owners = {}
