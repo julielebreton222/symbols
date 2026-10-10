@@ -93,7 +93,7 @@ For a storyteller, golden apples are the classic temptation: precious, shining, 
 - primary | Hesiod, *Theogony*, tr. Hugh G. Evelyn-White (1914) | https://www.gutenberg.org/ebooks/348
 - primary | Thomas Bulfinch, *The Age of Fable*: Hercules; Atalanta | https://www.gutenberg.org/ebooks/4928
 - primary | Ovid, *Metamorphoses* X: Atalanta and Hippomenes, tr. Henry T. Riley | https://www.gutenberg.org/ebooks/26073
-- art | Frederic Leighton, *The Garden of the Hesperides* (1892), Lady Lever Art Gallery | https://en.wikipedia.org/wiki/The_Garden_of_the_Hesperides_(painting)
+- art | Frederic Leighton, *The Garden of the Hesperides* (1892), Lady Lever Art Gallery, Port Sunlight | https://en.wikipedia.org/wiki/Frederic_Leighton
 
 ## Connections
 

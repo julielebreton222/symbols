@@ -176,6 +176,17 @@ def main():
         tale_j.setdefault(r["slug"], []).append({"y": r["year"], "place": pl[0], "ll": pl[1], "text": r["title"], "kind": "tale",
                                                  "link": f"#/tale/{r['page']}/{r['story']}"})
 
+    # Julie's own books (ingest/library.py): pages where each entry is named
+    mybooks = {}
+    lib_dir = os.path.join(ROOT, "content", "library")
+    if os.path.isdir(lib_dir):
+        for f in sorted(os.listdir(lib_dir)):
+            if f.endswith(".json"):
+                d = json.load(open(os.path.join(lib_dir, f)))
+                for slug, it in d["entries"].items():
+                    mybooks.setdefault(slug, []).append({"book": d["book"], "pp": it["printed_pages"], "pdf": it["pdf_pages"],
+                                                         "n": it["mentions"], "x": it.get("passage")})
+
     index, cards = [], [dict() for _ in range(BUCKETS)]
     culture_use = {}
     for r in con.execute("SELECT * FROM entries ORDER BY title COLLATE NOCASE"):
@@ -248,7 +259,7 @@ def main():
             "conn": conns.get(s, []), "images": im, "themes": th,
             "tales": tales.get(s, []), "tales_total": tale_total.get(s, len(tales.get(s, []))),
             "passages": passages.get(s, []), "facts": facts.get(s, []), "refs": refs.get(s, []),
-            "wiki_secs": wsecs.get(s, []), "journey": journey,
+            "wiki_secs": wsecs.get(s, []), "journey": journey, "mybooks": mybooks.get(s, []),
         }
 
     cultures_out = {}

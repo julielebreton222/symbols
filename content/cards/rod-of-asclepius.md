@@ -98,7 +98,7 @@ For a storyteller the rod holds a useful paradox: a healer marked by the creatur
 ## Go deeper
 
 - primary | Ovid, *Metamorphoses*, Book XV: Aesculapius comes to Rome as a serpent, tr. Henry T. Riley (1851) | https://www.gutenberg.org/ebooks/26073
-- primary | The Hippocratic Oath (late 5th–4th century BCE) | https://en.wikisource.org/wiki/Hippocratic_Oath
+- primary | The Hippocratic Oath (late 5th–4th century BCE) | https://en.wikisource.org/wiki/The_Oath_of_Hippocrates
 - primary | Thomas Bulfinch, *The Age of Fable*, on Aesculapius | https://www.gutenberg.org/ebooks/4928
 - primary | The Bible, Numbers 21:4–9 (the bronze serpent) | https://www.gutenberg.org/ebooks/10
 - book | Emma J. Edelstein and Ludwig Edelstein, *Asclepius: Collection and Interpretation of the Testimonies* (1945) |

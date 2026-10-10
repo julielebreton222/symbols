@@ -1,0 +1,5 @@
+# Julie's own books (the PDFs themselves go in library/, which is never published).
+#   file name | id | title | author | year | pd or copyrighted | page offset
+# page offset: printed page number minus PDF page number (0 if they match).
+# Example:
+#   cirlot-dictionary.pdf | cirlot | A Dictionary of Symbols | J. E. Cirlot | 1971 | copyrighted | -4

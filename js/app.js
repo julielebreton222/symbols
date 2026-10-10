@@ -246,7 +246,7 @@ window.APP = (function () {
   /* ---------------- the card ---------------- */
   const SECTION_ORDER = [['overview', 'Overview'], ['encyclopedia', 'From the encyclopedia'], ['myth', 'Myth & Origin'], ['lifetime', 'Lifetime'], ['journey', 'Journey'], ['today', 'Today'],
     ['seen', 'How it was seen'], ['readings', 'What the books say'], ['debates', 'Debates'], ['article', 'Article'], ['tales', 'In the tales'], ['books', 'In the old books'],
-    ['deeper', 'Go deeper'], ['connections', 'Connections'], ['images', 'Images'], ['sources', 'Sources'], ['mine', 'My notes']];
+    ['mybooks', 'In my books'], ['deeper', 'Go deeper'], ['connections', 'Connections'], ['images', 'Images'], ['sources', 'Sources'], ['mine', 'My notes']];
   const ERA_NAMES = { ancient: 'Ancient', medieval: 'Medieval', 'early modern': 'Early modern', modern: 'Modern' };
 
   views.entry = async function (args) {
@@ -346,6 +346,12 @@ window.APP = (function () {
         return `<div class="passage"><div class="where"><i>${esc(b.title)}</i>${b.author ? ', ' + esc(b.author) : ''}${b.translator ? `, tr. ${esc(b.translator)}` : ''}${p.ch && p.ch !== '—' ? ` · ${esc(p.ch)}` : ''}</div>
           <div class="text">${esc(p.text)}</div><a class="small" href="${esc(p.url)}" target="_blank" rel="noopener">Read it in place ↗</a></div>`;
       }).join('') + `<div class="srcnote">Public-domain texts from Project Gutenberg, quoted in full. The link opens the book at this passage.</div>`;
+    }
+    // In my books: pages in Julie's own copies
+    if (c.mybooks && c.mybooks.length) {
+      parts.mybooks = c.mybooks.map(m => `<div class="passage"><div class="where"><i>${esc(m.book.title)}</i>${m.book.author ? ', ' + esc(m.book.author) : ''}${m.book.year ? ` (${esc(m.book.year)})` : ''}</div>
+        <div>Open your copy at p. ${m.pp.join(', ')} <span class="m small">(PDF p. ${m.pdf.join(', ')}; named ${m.n}×)</span></div>
+        ${m.x ? `<div class="text">… ${esc(m.x)} …</div>` : ''}</div>`).join('') + '<div class="srcnote">From your own library (page numbers only for copyrighted books).</div>';
     }
     // Go deeper
     const deeper = (secs.deeper || []).map(d => `<li><span class="kind">${esc(d.h)}</span>${d.html}</li>`);

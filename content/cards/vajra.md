@@ -94,7 +94,7 @@ For a storyteller the vajra is an object that changes meaning as it changes hand
 
 ## Go deeper
 
-- primary | Rigveda 1.32, the hymn of Indra's victory over Vritra, tr. Ralph T. H. Griffith (1896) | https://en.wikisource.org/wiki/The_Rig_Veda/Mandala_1/Hymn_32
+- primary | Rigveda 1.32, the hymn of Indra's victory over Vritra, tr. Ralph T. H. Griffith (1896) | https://en.wikisource.org/wiki/The_Hymns_of_the_Rigveda/Book_1/Hymn_32
 - primary | *The Mahabharata*, tr. Kisari Mohan Ganguli: the story of Dadhichi and the weapon made from his bones (Vana Parva) | https://www.gutenberg.org/ebooks/15475
 - book | Mircea Eliade, *Patterns in Comparative Religion* (1958), on the sky and thunder gods |
 - book | Robert Beer, *The Encyclopedia of Tibetan Symbols and Motifs* (1999) |
@@ -113,4 +113,4 @@ For a storyteller the vajra is an object that changes meaning as it changes hand
 
 ## Sources
 
-- rigveda | primary | Rigveda 1.32, tr. Ralph T. H. Griffith (1896) | https://en.wikisource.org/wiki/The_Rig_Veda/Mandala_1/Hymn_32 | Public domain
+- rigveda | primary | Rigveda 1.32, tr. Ralph T. H. Griffith (1896) | https://en.wikisource.org/wiki/The_Hymns_of_the_Rigveda/Book_1/Hymn_32 | Public domain

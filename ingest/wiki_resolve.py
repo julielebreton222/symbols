@@ -18,6 +18,7 @@ import wm
 from common import CACHE, db, log, norm, wiki_source
 
 CACHE_FILE = os.path.join(CACHE, "wp_pages.json")
+NOT_A_SYMBOL = re.compile(r"\bis (?:a|an|the) [^.]{0,60}\b(?:album|single|song|film|band|video game|television series|novel|EP)\b", re.I)
 
 
 def fetch_pages(titles, cache):
@@ -84,6 +85,8 @@ def main():
                 con.execute("UPDATE entries SET wiki_title=NULL WHERE slug=?", (r["slug"],))
             continue
         role = r["wiki_role"] or "own"
+        if guess and NOT_A_SYMBOL.search((p.get("extract") or "")[:300]):
+            continue  # a guess by name that found an album, song, film...
         if guess:
             found += 1
             role = "own"
