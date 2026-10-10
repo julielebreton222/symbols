@@ -80,7 +80,20 @@ def main():
     books = {r["id"]: dict(r) for r in con.execute("SELECT * FROM books")}
     ent_themes, conns, imgs, tales, tale_total, passages, facts, secs = {}, {}, {}, {}, {}, {}, {}, {}
     for r in con.execute("SELECT * FROM entry_themes"):
-        ent_themes.setdefault(r["slug"], []).append({"id": r["theme"], "by": "keyword" if r["source"] == "keyword" else "card"})
+        by = "keyword" if r["source"] == "keyword" else (r["source"] if r["source"].startswith("book:") else "card")
+        ent_themes.setdefault(r["slug"], []).append({"id": r["theme"], "by": by})
+    # readings from the seven reference books, kept per book and never merged
+    refs, ref_books = {}, {}
+    for r in con.execute("SELECT * FROM ref_books ORDER BY year"):
+        ref_books[r["short"]] = {"id": r["id"], "title": r["title"], "author": r["author"], "year": r["year"], "label": r["label"],
+                                 "bib": json.loads(r["bibliography"]), "framework": json.loads(r["framework"]),
+                                 "chapters": json.loads(r["chapters"]), "scope": json.loads(r["scope"]), "count": r["entry_count"]}
+    short_of = {v["id"]: k for k, v in ref_books.items()}
+    for r in con.execute("SELECT * FROM ref_entries ORDER BY slug, book_id"):
+        refs.setdefault(r["slug"], []).append({
+            "b": short_of[r["book_id"]], "h": r["headword"], "sum": r["summary"], "th": json.loads(r["themes"]),
+            "rel": json.loads(r["related"]), "pp": r["printed_page"], "pdf": r["pdf_page"], "ch": r["chapter"],
+            "sub": r["subsection"], "who": r["contributor"], "st": r["status"], "ctx": r["context"], "cat": r["category"]})
     for r in con.execute("SELECT * FROM connections"):
         d = dict(r)
         conns.setdefault(r["a"], []).append({"to": r["b"], "type": r["type"], "reason": r["reason"], "src": r["source"], "origin": r["origin"], "dir": "out"})
@@ -137,7 +150,8 @@ def main():
             "g": json.loads(r["groups"]), "cu": cultures, "tr": trads, "th": [t["id"] for t in th],
             "st": r["status"], "y": r["first_year"], "ll": ll, "lla": approx, "ow": owners.get(s, []),
             "im": im[0]["thumb"] if im else None, "o": short(overview),
-            "n": [len(tales.get(s, [])), len(passages.get(s, [])), len(conns.get(s, []))],
+            "n": [len(tales.get(s, [])), len(passages.get(s, [])), len(conns.get(s, [])), len(refs.get(s, []))],
+            "rb": sorted({x["b"] for x in refs.get(s, [])}),
         })
         used_src = set()
         for kind in secs.get(s, {}).values():
@@ -149,6 +163,8 @@ def main():
         for k in (r["overview_src"], r["list_src"]):
             if k:
                 used_src.add(k)
+        for x in refs.get(s, []):
+            used_src.add("ref:" + x["b"])
         if r["wiki_title"]:
             used_src.add("wp:" + r["wiki_title"])
         if r["qid"]:
@@ -167,7 +183,7 @@ def main():
             "sources": {k: {kk: sources[k][kk] for kk in ("kind", "label", "url", "license", "note")} for k in sorted(used_src) if k in sources},
             "conn": conns.get(s, []), "images": im, "themes": th,
             "tales": tales.get(s, []), "tales_total": tale_total.get(s, len(tales.get(s, []))),
-            "passages": passages.get(s, []), "facts": facts.get(s, []),
+            "passages": passages.get(s, []), "facts": facts.get(s, []), "refs": refs.get(s, []),
         }
 
     cultures_out = {}
@@ -180,10 +196,11 @@ def main():
         "themes": {k: {"name": v["name"], "about": v["about"]} for k, v in themes.items()},
         "cultures": cultures_out,
         "books": {k: {kk: v[kk] for kk in ("title", "author", "translator", "year", "url")} for k, v in books.items()},
+        "refbooks": ref_books,
         "counts": {"entries": len(index), "full": sum(1 for e in index if e["st"] == "full"),
                    "tales": sum(len(v) for v in tales.values()), "passages": sum(len(v) for v in passages.values()),
                    "links": con.execute("SELECT count(*) FROM connections").fetchone()[0],
-                   "images": sum(len(v) for v in imgs.values())},
+                   "images": sum(len(v) for v in imgs.values()), "readings": sum(len(v) for v in refs.values())},
     }
     json.dump({"meta": meta, "entries": index}, open(os.path.join(OUT, "index.json"), "w"), ensure_ascii=False, separators=(",", ":"))
     for i, b in enumerate(cards):

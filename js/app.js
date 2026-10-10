@@ -68,7 +68,7 @@ window.APP = (function () {
     const out = [];
     for (const [slug, c] of Object.entries(cards)) {
       const parts = [c.overview, c.list_note, ...Object.values(c.sections || {}).flat().map(s => (s.h || '') + ' ' + s.html.replace(/<[^>]+>/g, ' ')),
-        ...(c.passages || []).map(p => p.text), ...(c.tales || []).map(t => t.t)];
+        ...(c.passages || []).map(p => p.text), ...(c.tales || []).map(t => t.t), ...(c.refs || []).map(r => r.sum + ' ' + (r.th || []).join(' '))];
       const text = fold(parts.join(' \n '));
       if (words.every(w => text.includes(w))) {
         const i = text.indexOf(words[0]);
@@ -109,6 +109,7 @@ window.APP = (function () {
         <span><b>${m.counts.links.toLocaleString()}</b> connections</span>
         <span><b>${m.counts.tales.toLocaleString()}</b> tale links</span>
         <span><b>${m.counts.passages.toLocaleString()}</b> old-book passages</span>
+        <span><b>${(m.counts.readings || 0).toLocaleString()}</b> readings from 7 books</span>
       </div>
       <h2 class="orn">Today’s card</h2>
       <div class="leaf daily">
@@ -129,6 +130,7 @@ window.APP = (function () {
       <h2 class="orn">Ways in</h2>
       <div class="tiles">
         <a class="tile" href="#/browse?status=full"><b>The full cards</b><span>Myth, history, interpretations, debates and an essay</span></a>
+        <a class="tile" href="#/library"><b>The reference library</b><span>What Cirlot, Eliade, Jung, Campbell, Turner and others say</span></a>
         <a class="tile" href="#/themes"><b>Themes</b><span>Invisibility, kingship, storm weapons, endless wealth…</span></a>
         <a class="tile" href="#/graph"><b>The web</b><span>Every connection, as a map of threads</span></a>
         <a class="tile" href="#/map"><b>The map</b><span>Where each one comes from</span></a>
@@ -216,7 +218,7 @@ window.APP = (function () {
 
   /* ---------------- the card ---------------- */
   const SECTION_ORDER = [['overview', 'Overview'], ['myth', 'Myth & Origin'], ['lifetime', 'Lifetime'], ['today', 'Today'],
-    ['seen', 'How it was seen'], ['debates', 'Debates'], ['article', 'Article'], ['tales', 'In the tales'], ['books', 'In the old books'],
+    ['seen', 'How it was seen'], ['readings', 'What the books say'], ['debates', 'Debates'], ['article', 'Article'], ['tales', 'In the tales'], ['books', 'In the old books'],
     ['deeper', 'Go deeper'], ['connections', 'Connections'], ['images', 'Images'], ['sources', 'Sources'], ['mine', 'My notes']];
   const ERA_NAMES = { ancient: 'Ancient', medieval: 'Medieval', 'early modern': 'Early modern', modern: 'Modern' };
 
@@ -259,6 +261,25 @@ window.APP = (function () {
     if (secs.today) parts.today = secs.today.map(s => (s.h ? `<h3>${esc(s.h)}</h3>` : '') + numbered(s.html)).join('');
     if (secs.seen) parts.seen = secs.seen.map(s => `<div class="lens">${s.h ? `<h3>${esc(s.h)}</h3>` : ''}${numbered(s.html)}</div>`).join('');
     if (secs.debates) parts.debates = secs.debates.map(s => s.h ? `<div class="debate"><h3>${esc(s.h)}</h3>${numbered(s.html)}</div>` : numbered(s.html)).join('');
+    // What the reference books say: one reading per book, never merged
+    if (c.refs && c.refs.length) {
+      const rb = meta.refbooks || {};
+      const STATUS = { source_attributed_symbolic_reflection: 'symbolic reflection', source_attributed_symbolic_interpretation: 'symbolic interpretation',
+        source_attributed_historical_or_iconographic_interpretation: 'historical / iconographic reading', source_attributed_comparative_interpretation: 'comparative reading',
+        source_attributed_analytic_concept: 'analytic concept', source_attributed_psychological_theory: 'psychological theory',
+        reported_ndembu_ritual_interpretation: 'Ndembu interpretation, as reported by Turner', source_attributed_ritual_description: 'ritual description',
+        case_specific_interpretation: 'reading of one case', source_attributed_critical_interpretation: 'critical reading' };
+      parts.readings = `<p class="m small">Each reading is one writer’s interpretation, summarised in our own words with its page. They are kept apart because they do not always agree.</p>` +
+        c.refs.map(r => { const b = rb[r.b] || {};
+          const where = [r.pp ? `p. ${r.pp}` : '', r.pdf ? `PDF p. ${r.pdf}` : ''].filter(Boolean).join(' · ');
+          const rel = (r.rel || []).map(x => x.slug && x.slug !== slug ? `<a class="chip" href="#/e/${x.slug}"${x.same_book ? '' : ' title="Read in another book: a suggestion to compare"'}>${esc(x.h)}${x.same_book ? '' : ' ↗'}</a>` : `<span class="chip">${esc(x.h)}</span>`).join('');
+          return `<div class="passage reading"><div class="where"><a href="#/library/${r.b}">${b.label || esc(r.b)}</a>${r.who ? ` · ${esc(r.who)}` : ''}</div>
+            ${r.h.toLowerCase() !== e.t.toLowerCase() ? `<div class="m small">under “${esc(r.h)}”</div>` : ''}
+            <div class="text">${esc(r.sum)}${srcRef('ref:' + r.b)}</div>
+            <div class="m small">${esc([where, r.ch, r.sub, STATUS[r.st] || '', r.ctx].filter(Boolean).join(' · '))}</div>
+            ${(r.th || []).length ? `<div class="chips">${r.th.map(t => `<span class="chip kw">${esc(t.replace(/_/g, ' '))}</span>`).join('')}</div>` : ''}
+            ${rel ? `<div class="chips"><span class="m small">See also:</span> ${rel}</div>` : ''}</div>`; }).join('');
+    }
     if (secs.article) parts.article = `<div class="article">${block(secs.article)}</div>`;
 
     // In the tales (the Fairies library)
@@ -352,6 +373,7 @@ window.APP = (function () {
         <li><b>Wikidata</b> (CC0): owners, works, types, places and dates, and many of the connections.</li>
         <li><b>Public-domain books</b> from Project Gutenberg: ${Object.keys(m.books).length} books, quoted where each entry is named. <a href="#/books">See the list</a>.</li>
         <li><b>Wikimedia Commons</b>: images, each with its author and licence; only freely licensed files are used.</li>
+        <li><b>The reference library</b>: seven books on symbols (Cirlot, Eliade, Jung and colleagues, ARAS, Tresidder, Turner, Campbell), distilled into short readings in our own words with their pages. <a href="#/library">See the books</a>.</li>
         <li><b>The Fairies library</b>: links to the tales where a symbol appears (titles and facts only).</li>
         <li><b>Full cards</b> are written in our own words; ideas from copyrighted books are summarised and credited with the page, with at most one short quotation.</li>
       </ul>
@@ -364,6 +386,33 @@ window.APP = (function () {
     const list = Object.entries(m.books).sort((a, b) => a[1].year - b[1].year);
     setPage(`<h1>The old books</h1><p class="center m">Public-domain texts searched for passages. Every one can be read in full on Project Gutenberg.</p>
       <ul class="list leaf">${list.map(([id, b]) => `<li><a href="${esc(b.url)}" target="_blank" rel="noopener"><i>${esc(b.title)}</i></a>${b.author ? ', ' + esc(b.author) : ''}${b.translator ? `, tr. ${esc(b.translator)}` : ''} <span class="m">(${b.year})</span></li>`).join('')}</ul>`);
+  };
+
+  /* ---------------- the reference library ---------------- */
+  views.library = async function (args) {
+    const rb = D.meta().refbooks || {};
+    if (!args[0]) {
+      setPage(`<h1>The reference library</h1>
+        <p class="center m">Seven books on symbols, distilled into short readings in our own words, each with its page. Their ideas sit side by side on the cards under “What the books say”.</p>
+        <div class="tiles">${Object.entries(rb).map(([k, b]) => `<a class="tile" href="#/library/${k}"><b>${esc(b.title)}</b><span>${esc(b.author || '')}${b.year ? ' · ' + b.year : ''} · ${b.count} readings</span></a>`).join('')}</div>
+        <p class="center small m">These are selective distillations, not complete books; they do not contain the books’ text or illustrations. Open your own copy at the page given for the full argument.</p>`, true);
+      return;
+    }
+    const k = args[0], b = rb[k];
+    if (!b) { setPage('<h1>Not found</h1>'); return; }
+    const entries = D.entries().filter(e => (e.rb || []).includes(k)).sort((a, x) => a.t.localeCompare(x.t));
+    const bib = b.bib || {};
+    const pages = p => p && p.length ? `<span class="m small"> (PDF p. ${p.length > 2 ? p[0] + '–' + p[p.length - 1] : p.join(', ')})</span>` : '';
+    setPage(`<h1>${esc(b.title)}</h1><p class="center">${b.label}</p>
+      <div class="leaf">
+        <dl class="facts">${Object.entries(bib).filter(([kk, v]) => v && !/source_type|pdf_filename|source_document_pages|source_pdf_pages/.test(kk)).map(([kk, v]) => `<dt>${esc(kk.replace(/_/g, ' '))}</dt><dd>${esc(Array.isArray(v) ? v.join(', ') : v)}</dd>`).join('')}</dl>
+        ${b.scope && b.scope.interpretation_warning ? `<p class="stubnote">${esc(b.scope.interpretation_warning)}</p>` : ''}
+        ${b.framework && b.framework.length ? `<h2>How the book reads symbols</h2><ul>${b.framework.map(f => `<li>${esc(f.principle)}${pages(f.source_pdf_pages)}</li>`).join('')}</ul>` : ''}
+        ${b.chapters && b.chapters.length ? `<h2>Chapters</h2>${b.chapters.map(ch => `<h3>${esc(ch.title || ch.id)}${ch.printed_pages ? ` <span class="m small">pp. ${ch.printed_pages.join('–')}</span>` : ''}</h3>
+          ${ch.overview ? `<p>${esc(ch.overview)}</p>` : ''}${(ch.ideas || []).length ? `<ul>${ch.ideas.map(i => `<li>${esc(i)}</li>`).join('')}</ul>` : ''}`).join('')}` : ''}
+      </div>
+      <h2 class="orn">Its ${entries.length} headwords</h2>
+      <ul class="entries">${entries.map(entryTile).join('')}</ul>`, true);
   };
 
   /* ---------------- router ---------------- */

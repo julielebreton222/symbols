@@ -32,3 +32,8 @@
 2026-10-10 19:06:33  export: 1290 entries; index 529 KB, cards 3648 KB
 2026-10-10 19:07:06  export: 1290 entries; index 511 KB, cards 3596 KB
 2026-10-10 19:09:25  export: 1290 entries; index 511 KB, cards 3596 KB
+2026-10-10 21:15:49  reference_books: 666 readings from 7 books; 77 headwords matched to entries, 448 new entries; 309 relationships and 519 related-headword links
+2026-10-10 21:16:14  connections: added 278 links {'owner': 22, 'story': 73, 'part': 7, 'named': 3, 'context': 173}; 1106 links in all; 1237 keyword themes
+2026-10-10 21:16:15  export: 1738 entries; index 733 KB, cards 4533 KB
+2026-10-10 21:16:43  reference_books: 666 readings from 7 books; 525 headwords matched to entries, 0 new entries; 309 relationships and 519 related-headword links
+2026-10-10 21:16:43  export: 1738 entries; index 733 KB, cards 4534 KB

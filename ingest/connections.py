@@ -44,7 +44,7 @@ def link(con, a, b, typ, reason, src, origin):
 
 def main():
     con = db()
-    con.execute("DELETE FROM connections WHERE origin != 'card'")
+    con.execute("DELETE FROM connections WHERE origin IN ('wikidata', 'wikipedia')")
     con.execute("DELETE FROM entry_themes WHERE source='keyword'")
     n = {"owner": 0, "story": 0, "part": 0, "named": 0, "context": 0}
 
