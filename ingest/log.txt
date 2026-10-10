@@ -89,3 +89,15 @@
 2026-10-10 22:00:10  cards: 22 full cards loaded, 0 with errors
 2026-10-10 22:01:13  cards: 24 full cards loaded, 0 with errors
 2026-10-10 22:01:20  export: 1736 entries; index 766 KB, cards 7116 KB
+2026-10-10 22:02:54  cards: 26 full cards loaded, 0 with errors
+2026-10-10 22:03:55  cards: 28 full cards loaded, 0 with errors
+2026-10-10 22:04:50  cards: ERROR in golden-apples-of-the-hesperides.md: connection to unknown card “apples-of-iðunn”
+2026-10-10 22:04:50  cards: 29 full cards loaded, 1 with errors
+2026-10-10 22:04:54  cards: 30 full cards loaded, 0 with errors
+2026-10-10 22:04:54  reference_books: 666 readings from 7 books; 525 headwords matched to entries, 0 new entries; 308 relationships and 518 related-headword links
+2026-10-10 22:04:54  cards: 30 full cards loaded, 0 with errors
+2026-10-10 22:04:55  connections: added 269 links {'owner': 17, 'story': 71, 'part': 6, 'named': 3, 'context': 172}; 1320 links in all; 1187 keyword themes
+2026-10-10 22:11:30  pd_books: 42 books, 100186 paragraphs; 1932 passages for 422 entries
+2026-10-10 22:14:03  tales: 7219 tales read; 6359 tale links for 328 entries
+2026-10-10 22:14:03  wiki_articles: 967 articles; fuller overviews for 140 entries, passages for 114 entries in other articles
+2026-10-10 22:14:04  export: 1736 entries; index 768 KB, cards 7902 KB
