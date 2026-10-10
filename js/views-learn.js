@@ -204,7 +204,7 @@
       }
       const b = D.get(l.to);
       const side = e => `<div class="entry" style="text-align:center">${e.im ? `<img class="thumb" src="${esc(A.thumb(e.im, 330))}" alt="">` : `<div class="thumb none">${A.initial(e.t)}</div>`}
-        <div class="body"><div class="name">${esc(e.t)}</div><div class="sub">${A.catBadges(e)} ${esc(e.cu.slice(0, 2).join(' · '))}</div><div class="blurb">${esc(e.o)}</div></div></div>`;
+        <div class="body"><div class="name">${esc(e.t)}</div><div class="sub">${A.catBadges(e, false)} ${esc(e.cu.slice(0, 2).join(' · '))}</div><div class="blurb">${esc(e.o)}</div></div></div>`;
       box.innerHTML = `<div class="dots-pair">${side(a)}<div class="vs">⟷</div>${side(b)}</div>
         <div class="leaf"><div class="field"><label>Your guess</label><input type="text" id="guess" style="width:100%" placeholder="They are both…"></div>
         <div class="row" style="justify-content:center"><button class="btn primary" id="reveal">Reveal</button></div><div id="ans"></div></div>`;

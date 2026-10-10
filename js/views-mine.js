@@ -190,7 +190,7 @@
         const rb = D.meta().refbooks || {};
         lenses.push(`<div class="passage"><div class="where">${A.entryLink(s)}</div>
           ${(c.refs || []).map(r => `<div class="text">${esc(r.sum)} <span class="m small">— ${esc((rb[r.b] || {}).author || r.b)}${r.pp ? ', p. ' + r.pp : ''}</span></div>`).join('') || `<div class="text">${esc(e.o)}</div>`}
-          ${e.th.length ? `<div class="chips">${e.th.map(t => `<span class="chip kw">${esc((D.meta().themes[t] || {}).name || t)}</span>`).join('')}</div>` : ''}</div>`);
+          ${e.th.length ? `<div class="chips">${e.th.map(t => `<a class="chip kw" href="#/theme/${t}">${esc((D.meta().themes[t] || {}).name || t)}</a>`).join('')}</div>` : ''}</div>`);
       }
       setPage(tabs('dreams') + `<div class="leaf"><h2>${esc(d.title || 'A dream')}</h2><p class="m">${fmtDate(d.date)}</p>
         <div style="white-space:pre-wrap">${esc(d.text)}</div>

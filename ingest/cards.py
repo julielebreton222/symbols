@@ -52,7 +52,8 @@ def blocks(text, known):
         lines = [l.rstrip() for l in chunk.split("\n") if l.strip()]
         if not lines:
             continue
-        m = SRC.search(lines[-1])
+        is_list = all(l.lstrip().startswith(("- ", "* ")) for l in lines)
+        m = None if is_list else SRC.search(lines[-1])
         k = []
         if m:
             k = [x.strip() for x in m.group(1).split(",") if x.strip()]
@@ -62,7 +63,16 @@ def blocks(text, known):
         keys += k
         label = "".join(f'<sup class="src" data-src="{html.escape(x)}">{html.escape(x)}</sup>' for x in k)
         if all(l.lstrip().startswith(("- ", "* ")) for l in lines):
-            items = [inline(re.sub(r"^\s*[-*]\s+", "", l), known) for l in lines]
+            items = []
+            for l in lines:
+                l = re.sub(r"^\s*[-*]\s+", "", l)
+                mi = SRC.search(l)
+                ik = []
+                if mi:
+                    ik = [x.strip() for x in mi.group(1).split(",") if x.strip()]
+                    l = l[:mi.start()]
+                    keys += ik
+                items.append(inline(l, known) + "".join(f'<sup class="src" data-src="{html.escape(x)}">{html.escape(x)}</sup>' for x in ik))
             out.append("<ul>" + "".join(f"<li>{i}</li>" for i in items) + "</ul>" + (f'<p class="srcs">{label}</p>' if label else ""))
         elif all(l.startswith(">") for l in lines):
             q = " ".join(l.lstrip("> ").strip() for l in lines)
@@ -159,6 +169,20 @@ def load(con, path, known):
             keys[k] = wiki_source(con, k[3:])
         else:
             keys[k] = source(con, f"{slug}:{k}", kind, inline(label), url, lic)
+
+    class Keys(dict):
+        def __missing__(self, k):
+            if k.startswith("wp:"):
+                self[k] = wiki_source(con, k[3:])
+                return self[k]
+            raise KeyError(k)
+
+        def __contains__(self, k):
+            return dict.__contains__(self, k) or k.startswith("wp:")
+
+        def get(self, k, default=None):
+            return self[k] if k in self else default
+    keys = Keys(keys)
 
     con.execute("DELETE FROM sections WHERE slug=?", (slug,))
 

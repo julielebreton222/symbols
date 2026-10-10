@@ -17,7 +17,7 @@ import wm
 from common import CACHE, db, log
 
 CACHE_FILE = os.path.join(CACHE, "commons.json")
-OK = re.compile(r"^(public domain|pd\b|pd-|cc0|no restrictions|gfdl|godl|cc[- ]by(?:[- ]sa)?(?:[- ][\d.]+)?(?:[- ]\w+)?$)", re.I)
+OK = re.compile(r"^(public domain|pd\b|pd-|cc0|no restrictions|copyrighted free use|gfdl|godl|cc[- ]by(?:[- ]sa)?(?:[- ][\d.]+)?(?:[- ]\w+)?$)", re.I)
 
 
 def strip_html(s):

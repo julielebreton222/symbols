@@ -18,14 +18,18 @@ window.APP = (function () {
     document.body.appendChild(t); setTimeout(() => t.remove(), 2600);
   }
   function setPage(html, wide) { app().innerHTML = `<div class="page${wide ? ' wide' : ''}">${html}</div>`; window.scrollTo(0, 0); }
-  const catBadges = e => e.c.map(c => `<span class="cat ${c}">${esc(D.CATS[c] || c)}</span>`).join(' ');
+  // linked=false inside tiles, which are links already
+  const catBadges = (e, linked = true) => e.c.map(c => linked
+    ? `<a class="cat ${c}" href="#/browse?cat=${c}" style="text-decoration:none">${esc(D.CATS[c] || c)}</a>`
+    : `<span class="cat ${c}">${esc(D.CATS[c] || c)}</span>`).join(' ');
+  const tagLink = t => `<a class="chip kw" href="#/tag/${encodeURIComponent(t)}" title="A theme word used by the reference books">${esc(t.replace(/_/g, ' '))}</a>`;
   const initial = t => esc((t || '?').replace(/^(the|a)\s+/i, '').charAt(0).toUpperCase());
   function entryTile(e) {
     const sub = [...e.cu.slice(0, 2), ...(e.tr || []).filter(t => !e.cu.includes(t)).slice(0, 1)].join(' · ');
     return `<li class="entry"><a class="cover" href="#/e/${e.s}">
       ${e.im ? `<img class="thumb" loading="lazy" alt="" src="${esc(thumb(e.im, 400))}">` : `<div class="thumb none">${initial(e.t)}</div>`}
       <div class="body"><div class="name">${esc(e.t)}</div>
-      <div class="sub">${catBadges(e)} ${esc(sub)}</div>
+      <div class="sub">${catBadges(e, false)} ${esc(sub)}</div>
       ${e.st === 'full' ? '<div class="full">✦ full card</div>' : ''}
       <div class="blurb">${esc(e.o)}</div></div></a></li>`;
   }
@@ -216,6 +220,29 @@ window.APP = (function () {
     location.replace('#/browse?culture=' + encodeURIComponent(name));
   };
 
+  views.tag = async function (args) {
+    const t = decodeURIComponent(args[0] || '');
+    const list = D.entries().filter(e => (e.rt || []).includes(t));
+    setPage(`<h1>${esc(t.replace(/_/g, ' '))}</h1><p class="center m">A theme word the reference books use. ${plural(list.length, 'entry', 'entries')} carry it in at least one book’s reading.</p>
+      <ul class="entries">${list.map(entryTile).join('')}</ul>`, true);
+  };
+  views.owner = async function (args) {
+    const o = decodeURIComponent(args[0] || '');
+    const list = D.entries().filter(e => (e.ow || []).includes(o));
+    const self = D.entries().find(e => fold(e.t) === fold(o));
+    setPage(`<h1>${esc(o)}</h1><p class="center m">${plural(list.length, 'thing', 'things')} that belong to ${esc(o)}.${self ? ` See also ${entryLink(self.s)}.` : ''} <a href="#/browse?q=${encodeURIComponent(o)}">Search for “${esc(o)}”</a></p>
+      <ul class="entries">${list.map(entryTile).join('')}</ul>`, true);
+  };
+  views.fact = async function (args) {
+    const p = decodeURIComponent(args[0] || ''), v = decodeURIComponent(args[1] || '');
+    setPage(`<h1>${esc(v)}</h1><p class="center m">Looking through every card…</p>`, true);
+    const cards = await D.allCards();
+    const list = Object.entries(cards).filter(([, c]) => (c.facts || []).some(f => f.v === v && (!p || f.p === p))).map(([s]) => D.get(s)).filter(Boolean)
+      .sort((a, b) => a.t.localeCompare(b.t));
+    setPage(`<h1>${esc(v)}</h1><p class="center m">${plural(list.length, 'entry', 'entries')} where Wikidata gives “${esc(p)}: ${esc(v)}”. <a href="#/browse?q=${encodeURIComponent(v)}">Search for “${esc(v)}”</a></p>
+      <ul class="entries">${list.map(entryTile).join('')}</ul>`, true);
+  };
+
   /* ---------------- the card ---------------- */
   const SECTION_ORDER = [['overview', 'Overview'], ['myth', 'Myth & Origin'], ['lifetime', 'Lifetime'], ['today', 'Today'],
     ['seen', 'How it was seen'], ['readings', 'What the books say'], ['debates', 'Debates'], ['article', 'Article'], ['tales', 'In the tales'], ['books', 'In the old books'],
@@ -252,7 +279,7 @@ window.APP = (function () {
     if (c.facts && c.facts.length) {
       const g = {};
       for (const f of c.facts) (g[f.p] = g[f.p] || []).push(f.v);
-      parts.overview += `<h3>Facts</h3><dl class="facts">${Object.entries(g).map(([p, v]) => `<dt>${esc(p)}</dt><dd>${esc([...new Set(v)].join(', '))}</dd>`).join('')}</dl>
+      parts.overview += `<h3>Facts</h3><dl class="facts">${Object.entries(g).map(([p, v]) => `<dt>${esc(p)}</dt><dd>${[...new Set(v)].map(x => `<a href="#/fact/${encodeURIComponent(p)}/${encodeURIComponent(x)}">${esc(x)}</a>`).join(', ')}</dd>`).join('')}</dl>
         <div class="srcnote">From Wikidata (CC0)${srcRef('wd:' + c.qid)}</div>`;
     }
     // Myth & origin
@@ -277,7 +304,7 @@ window.APP = (function () {
             ${r.h.toLowerCase() !== e.t.toLowerCase() ? `<div class="m small">under “${esc(r.h)}”</div>` : ''}
             <div class="text">${esc(r.sum)}${srcRef('ref:' + r.b)}</div>
             <div class="m small">${esc([where, r.ch, r.sub, STATUS[r.st] || '', r.ctx].filter(Boolean).join(' · '))}</div>
-            ${(r.th || []).length ? `<div class="chips">${r.th.map(t => `<span class="chip kw">${esc(t.replace(/_/g, ' '))}</span>`).join('')}</div>` : ''}
+            ${(r.th || []).length ? `<div class="chips">${r.th.map(tagLink).join('')}</div>` : ''}
             ${rel ? `<div class="chips"><span class="m small">See also:</span> ${rel}</div>` : ''}</div>`; }).join('');
     }
     if (secs.article) parts.article = `<div class="article">${block(secs.article)}</div>`;
@@ -349,7 +376,11 @@ window.APP = (function () {
         ${e.a.length ? `<div class="aka">also ${esc(e.a.join(' · '))}</div>` : ''}
         <div class="chips" style="justify-content:center">
           ${[...e.cu, ...(e.tr || []).filter(t => !e.cu.includes(t))].map(x => `<a class="chip" href="#/browse?culture=${encodeURIComponent(x)}">${esc(x)}</a>`).join('')}
-          ${(c.themes || []).map(t => `<a class="chip${t.by === 'keyword' ? ' kw' : ''}" title="${t.by === 'keyword' ? 'Found by keyword in the summary' : 'Theme chosen for this card'}" href="#/theme/${t.id}">${esc((meta.themes[t.id] || {}).name || t.id)}</a>`).join('')}
+          ${(c.themes || []).map(t => `<a class="chip${t.by === 'keyword' ? ' kw' : ''}" title="${t.by === 'keyword' ? 'Found by keyword in the summary' : t.by.startsWith('book:') ? 'A theme the reference books give it' : 'Theme chosen for this card'}" href="#/theme/${t.id}">${esc((meta.themes[t.id] || {}).name || t.id)}</a>`).join('')}
+        </div>
+        <div class="chips" style="justify-content:center">
+          ${(e.ow || []).filter(o => o.toLowerCase() !== e.t.toLowerCase()).map(o => `<a class="chip" href="#/owner/${encodeURIComponent(o)}" title="Everything that belongs to ${esc(o)}">✋ ${esc(o)}</a>`).join('')}
+          ${e.g.map(g => `<a class="chip" href="#/browse?group=${encodeURIComponent(g)}" title="Group">${esc(g)}</a>`).join('')}
         </div>
       </div>
       ${hero ? `<figure class="hero"><img src="${esc(thumb(hero.thumb, 500))}" alt="${esc(e.t)}"><figcaption>${esc(hero.author || '')} · ${esc(hero.license)} · <a href="${esc(hero.page_url)}" target="_blank" rel="noopener">Wikimedia Commons</a></figcaption></figure>` : ''}
@@ -455,5 +486,5 @@ window.APP = (function () {
     window.addEventListener('hashchange', route);
     route();
   }
-  return { start, register, esc, fold, plural, toast, setPage, entryTile, entryLink, catBadges, thumb, search, yearLabel, fairiesBase, views, initial, route };
+  return { tagLink, start, register, esc, fold, plural, toast, setPage, entryTile, entryLink, catBadges, thumb, search, yearLabel, fairiesBase, views, initial, route };
 })();

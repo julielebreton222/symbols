@@ -38,3 +38,36 @@
 2026-10-10 21:16:43  reference_books: 666 readings from 7 books; 525 headwords matched to entries, 0 new entries; 309 relationships and 519 related-headword links
 2026-10-10 21:16:43  export: 1738 entries; index 733 KB, cards 4534 KB
 2026-10-10 21:19:56  export: 1738 entries; index 733 KB, cards 4533 KB
+2026-10-10 21:24:53  cards: ERROR in holy-grail.md: connection source key “wp:Cup of Jamshid” not in ## Sources
+2026-10-10 21:24:53  cards: 0 full cards loaded, 1 with errors
+2026-10-10 21:25:05  cards: 1 full cards loaded, 0 with errors
+2026-10-10 21:25:34  export: 1738 entries; index 765 KB, cards 4558 KB
+2026-10-10 21:28:22  cards: 4 full cards loaded, 0 with errors
+2026-10-10 21:29:36  cards: 6 full cards loaded, 0 with errors
+2026-10-10 21:29:42  seeds: 478 new entries from seeds.txt (478 in total)
+2026-10-10 21:29:43  wiki_lists: List of mythological objects (rev 1368347547): 877 items, 639 new entries
+2026-10-10 21:29:43  wiki_lists: List of magical weapons (rev 1368414832): 67 items, 9 new entries
+2026-10-10 21:29:43  wiki_lists: List of symbols (rev 1372165785): 164 items, 114 new entries
+2026-10-10 21:29:43  wiki_lists: Religious symbol (rev 1376641920): 31 items, 7 new entries
+2026-10-10 21:29:43  wiki_lists: Adinkra symbols (rev 1365643034): 46 items, 43 new entries
+2026-10-10 21:29:43  wiki_lists: Thirteen Treasures of the Island of Britain (rev 1362001737): 14 items, 0 new entries
+2026-10-10 21:29:43  wiki_lists: 1290 entries in total
+2026-10-10 21:29:43  wiki_resolve: no article for chandrahansa: “Chandrahansa”
+2026-10-10 21:29:43  wiki_resolve: 445 entries with their own article, 683 with a context article, 34 found by name, 1 named articles missing
+2026-10-10 21:29:43  wikidata: 966 items fetched, 1527 facts stored
+2026-10-10 21:29:43  images: skipped Pyramidion-satellite-khéops.jpg for benben: licence “Copyrighted free use” is not free enough
+2026-10-10 21:29:43  images: skipped Tutankhamun jackal (blacked).png for black: licence “Copyrighted free use” is not free enough
+2026-10-10 21:29:43  images: 661 images kept, 2 refused for their licence
+2026-10-10 21:29:43  cards: 6 full cards loaded, 0 with errors
+2026-10-10 21:29:43  reference_books: 666 readings from 7 books; 79 headwords matched to entries, 446 new entries; 309 relationships and 523 related-headword links
+2026-10-10 21:29:43  cards: 6 full cards loaded, 0 with errors
+2026-10-10 21:29:44  connections: added 272 links {'owner': 17, 'story': 72, 'part': 7, 'named': 3, 'context': 173}; 1157 links in all; 1218 keyword themes
+2026-10-10 21:34:57  pd_books: 32 books, 81820 paragraphs; 1708 passages for 380 entries
+2026-10-10 21:37:24  tales: 7219 tales read; 6269 tale links for 325 entries
+2026-10-10 21:37:25  export: 1736 entries; index 765 KB, cards 5867 KB
+2026-10-10 21:37:34  images: 663 images kept, 0 refused for their licence
+2026-10-10 21:37:35  export: 1736 entries; index 765 KB, cards 5868 KB
+2026-10-10 21:37:55  cards: 6 full cards loaded, 0 with errors
+2026-10-10 21:37:56  export: 1736 entries; index 765 KB, cards 5869 KB
+2026-10-10 21:38:10  cards: 6 full cards loaded, 0 with errors
+2026-10-10 21:38:11  export: 1736 entries; index 765 KB, cards 5869 KB

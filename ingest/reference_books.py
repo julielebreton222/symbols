@@ -96,7 +96,13 @@ def main():
             known.setdefault(norm(re.sub(r"\s*\(.*\)$", "", n)), r["slug"])
 
     def find(names):
+        expanded = []
         for n in names:
+            expanded.append(n)
+            m = re.match(r"^(.+?)\s*\((?:or\s+)?(.+?)\)$", n)  # "Serpent (or Snake)"
+            if m:
+                expanded += [m.group(1), m.group(2)]
+        for n in expanded:
             k = norm(n)
             for cand in (k, k[:-1] if k.endswith("s") else k + "s", re.sub(r"^(?:a|an)-", "", k)):
                 if cand in known:

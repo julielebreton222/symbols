@@ -155,6 +155,7 @@ def main():
             "im": im[0]["thumb"] if im else None, "o": short(overview),
             "n": [len(tales.get(s, [])), len(passages.get(s, [])), len(conns.get(s, [])), len(refs.get(s, []))],
             "rb": sorted({x["b"] for x in refs.get(s, [])}),
+            "rt": sorted({t for x in refs.get(s, []) for t in x["th"]}),
         })
         used_src = set()
         for kind in secs.get(s, {}).values():

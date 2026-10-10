@@ -154,6 +154,7 @@ label { font-size: .92rem; }
 .srcnote { font-size: .78rem; color: var(--ink-soft); margin-top: .4rem; }
 sup.src { font-size: .62rem; margin-left: .1rem; cursor: pointer; color: var(--gold); font-family: system-ui, sans-serif; font-weight: 600; }
 sup.src a { text-decoration: none; color: inherit; }
+sup.src + sup.src::before { content: ','; margin-right: .05rem; }
 .unverified { font-size: .72rem; border: 1px dashed var(--bad); color: var(--bad); border-radius: 3px; padding: 0 .25rem; font-family: system-ui, sans-serif; }
 .stubnote { border: 1px dashed var(--gold-soft); border-radius: 5px; padding: .6rem .9rem; font-size: .92rem; color: var(--ink-soft); background: color-mix(in srgb, var(--chip) 60%, transparent); }
 .firstline { font-family: var(--caps); color: var(--ink-soft); font-size: .95rem; }
