@@ -1,0 +1,33 @@
+# Themes. Full cards list their themes by hand. Stubs get a theme only when a
+# keyword below appears in their summary; those tags are marked "found by keyword"
+# in the app so they are never mistaken for a scholar's judgement.
+#
+#   id | name | keywords (a regular expression, case-insensitive) | about
+
+invisibility | Invisibility | invisib|unseen|conceal(?:s|ed|ing)? the wearer|makes? (?:the wearer|him|her|one) invisible | Things that hide their bearer from sight.
+immortality | Immortality | immortal|eternal (?:life|youth)|everlasting life|never die|elixir of life | Food, drink and objects that keep death away.
+healing | Healing | heal|cure[sd]?\b|medicine|restor(?:e|es|ed) (?:life|health) | Objects that mend bodies and lands.
+rebirth | Rebirth & renewal | rebirth|reborn|resurrect|renew|regenerat|rises? from (?:its|the) ashes | Death followed by return.
+kingship | Rightful kingship | kingship|sovereignty|coronation|crowned|rightful (?:king|ruler|heir)|true king|regalia|(?:choose|chose|proclaim|confirm)s? the (?:king|high king)|(?:shriek|cr(?:y|ies)) (?:out )?under the (?:rightful|true)|to (?:become|be) king | Objects that choose or prove a ruler.
+wealth | Endless wealth & plenty | wealth|riches|abundan|plenty|inexhaustible|never empt|treasure|prosperity|grain|gold(?:en)? rings? | Objects that make riches without end.
+protection | Protection | protect|ward(?:s|ed)? off|amulet|talisman|guard against|evil eye|invulnerab|impenetrable | Shields, charms and signs that keep harm away.
+death | Death & the underworld | \bdeath\b|the dead\b|underworld|afterlife|realm of the dead|land of the dead|funeral|psychopomp | Objects of death, the dead and the world below.
+fertility | Fertility | fertil|fecund|childbirth|harvest|womb|phallic | Life, birth and growing things.
+wisdom | Wisdom & knowledge | wisdom|knowledge|enlighten|insight|learning|poetry|inspiration | Objects and signs of knowing.
+transformation | Transformation | transform|shape-?shift|turn(?:s|ed)? into|metamorph|change (?:its|his|her) shape | Things that change what a being is.
+travel | Travel & flight | fly|flies|flight|flying|carr(?:y|ies) (?:its|the) (?:owner|wearer|rider)|travel|journey|ship\b|chariot|boots | Objects that carry their owner across land, sea and sky.
+binding | Binding & oaths | \bbind(?:s|ing)?\b|\bbound by|fetter|chained|shackle|knot\b|oath|vow | Things that tie, hold and keep promises.
+prophecy | Prophecy & divination | prophe|foresee|foretell|divination|oracle|seer|scrying|future | Ways to see what is hidden or still to come.
+storm | Storm & thunder | thunder|lightning|storm|tempest|hail\b | The weapons and signs of the sky gods.
+light | Light & the sun | \bsun\b|solar|light(?:s|ed)? up|shin(?:e|es|ing)|radian|dawn | Light, the sun and shining things.
+love | Love & desire | \blove\b|desire|beloved|passion|marriage|wedding | Objects of love, longing and marriage.
+curse | Curses | curse[sd]?\b|doom|bad luck|misfortune|bane | Objects that bring ruin on their owners.
+luck | Luck & fortune | \bluck|lucky|fortune|good omen | Signs of chance and good fortune.
+victory | Victory in battle | victor|invincib|never (?:miss|fail)|unbeatable|always (?:hits|returns|wins) | Weapons that cannot lose or cannot miss.
+water | Water & the sea | \bsea\b|ocean|waters|river|lake|wave|tide|rain | Things of the sea, rivers and rain.
+fire | Fire | \bfire|flame|blaz|burn | Burning things and keepers of the flame.
+world-axis | World axis & sacred centre | world tree|axis mundi|navel of the world|centre of the world|cosmic|pillar of heaven | Trees, stones and mountains at the centre of the world.
+sacred-vessel | Sacred vessels | cauldron|chalice|cup|bowl|vessel|grail|horn of plenty | Containers of holy or magical things.
+quest | Quests | quest|seek|search for|sought | Objects people go looking for.
+music | Music & sound | music|lyre|harp|horn\b|flute|pipe|drum|song | Instruments with power.
+creation | Creation | creat(?:e|ed|ion) (?:the|of the) (?:world|earth|universe)|cosmogon|primordial | Objects at the beginning of the world.

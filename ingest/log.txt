@@ -1,0 +1,34 @@
+2026-10-10 18:35:48  seeds: 478 new entries from seeds.txt (478 in total)
+2026-10-10 18:35:49  wiki_lists: List of mythological objects (rev 1368347547): 877 items, 639 new entries
+2026-10-10 18:35:49  wiki_lists: List of magical weapons (rev 1368414832): 67 items, 9 new entries
+2026-10-10 18:35:49  wiki_lists: List of symbols (rev 1372165785): 164 items, 114 new entries
+2026-10-10 18:35:49  wiki_lists: Religious symbol (rev 1376641920): 31 items, 7 new entries
+2026-10-10 18:35:49  wiki_lists: Adinkra symbols (rev 1365643034): 46 items, 43 new entries
+2026-10-10 18:35:49  wiki_lists: Thirteen Treasures of the Island of Britain (rev 1362001737): 14 items, 0 new entries
+2026-10-10 18:35:49  wiki_lists: 1290 entries in total
+2026-10-10 18:36:01  wiki_resolve: no article for chandrahansa: “Chandrahansa”
+2026-10-10 18:36:01  wiki_resolve: 445 entries with their own article, 683 with a context article, 34 found by name, 1 named articles missing
+2026-10-10 18:48:02  wikidata: 966 items fetched, 1527 facts stored
+2026-10-10 18:51:05  images: skipped Pyramidion-satellite-khéops.jpg for benben: licence “Copyrighted free use” is not free enough
+2026-10-10 18:51:05  images: skipped Tutankhamun jackal (blacked).png for black: licence “Copyrighted free use” is not free enough
+2026-10-10 18:51:05  images: skipped Bridge Alcantara.JPG for bridge: licence “GFDL” is not free enough
+2026-10-10 18:51:05  images: skipped Buddha, standing under umbrella, inscribed Gift of Abhayamira in 154 GE 474 CE in the reign of Kumaragupta II.jpg for parasol-ashtamangala: licence “GODL-India” is not free enough
+2026-10-10 18:51:05  images: skipped Pelican lakes entrance02 edit.jpg for pelican-in-her-piety: licence “GFDL 1.2” is not free enough
+2026-10-10 18:51:05  images: skipped La doctrine des moevrs, tiree de la philosophie des stoiques, representee en cent tableavx et expliqvee en cent discovrs pour l'instruction de la ieunesse (1646) (14747984904).jpg for sword-of-damocles: licence “No restrictions” is not free enough
+2026-10-10 18:51:05  images: skipped Miecz św Piotra RB1.JPG for sword-of-saint-peter: licence “GFDL 1.2” is not free enough
+2026-10-10 18:51:05  images: skipped Image from page 294 of "British Malaya; an account of the origin and progress of British influence in Malaya;... (14581196527).jpg for kris-taming-sari: licence “No restrictions” is not free enough
+2026-10-10 18:51:05  images: skipped Image from page 294 of "British Malaya; an account of the origin and progress of British influence in Malaya;... (14581196527).jpg for cura-si-manjakini: licence “No restrictions” is not free enough
+2026-10-10 18:51:05  images: 654 images kept, 9 refused for their licence
+2026-10-10 18:51:14  images: skipped Pyramidion-satellite-khéops.jpg for benben: licence “Copyrighted free use” is not free enough
+2026-10-10 18:51:14  images: skipped Tutankhamun jackal (blacked).png for black: licence “Copyrighted free use” is not free enough
+2026-10-10 18:51:14  images: 661 images kept, 2 refused for their licence
+2026-10-10 18:56:25  pd_books: 32 books, 81820 paragraphs; 48 passages for 15 entries
+2026-10-10 18:59:22  pd_books: 32 books, 81820 paragraphs; 837 passages for 214 entries
+2026-10-10 19:02:16  pd_books: 32 books, 81820 paragraphs; 837 passages for 214 entries
+2026-10-10 19:04:46  tales: 7219 tales read; 3751 tale links for 163 entries
+2026-10-10 19:05:40  connections: added 278 links {'owner': 22, 'story': 73, 'part': 7, 'named': 3, 'context': 173}; 278 links in all; 1154 keyword themes
+2026-10-10 19:05:51  connections: added 278 links {'owner': 22, 'story': 73, 'part': 7, 'named': 3, 'context': 173}; 278 links in all; 918 keyword themes
+2026-10-10 19:06:32  connections: added 278 links {'owner': 22, 'story': 73, 'part': 7, 'named': 3, 'context': 173}; 278 links in all; 916 keyword themes
+2026-10-10 19:06:33  export: 1290 entries; index 529 KB, cards 3648 KB
+2026-10-10 19:07:06  export: 1290 entries; index 511 KB, cards 3596 KB
+2026-10-10 19:09:25  export: 1290 entries; index 511 KB, cards 3596 KB

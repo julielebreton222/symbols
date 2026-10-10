@@ -1,0 +1,6 @@
+.cache/
+library/*
+!library/README.md
+__pycache__/
+*.pyc
+.DS_Store

@@ -1,0 +1,577 @@
+# The seed list: every entry here is in the app, even if no Wikipedia list has it.
+#
+# Format
+#   [category | group]          starts a group. category: object, symbol or sacred
+#   Name                        one entry
+#   Name => Wikipedia title     its own article has a different or ambiguous title
+#   Name ~> Wikipedia title     no article of its own: link this one for context (owner, story, list)
+#   Name +sacred                also put the entry in another category (+object, +symbol, +sacred)
+#   Name @ tradition            (sacred) the faith it belongs to
+# Entries with the same name in several groups are merged into one card.
+
+[object | Swords & blades]
+Excalibur
+Clarent
+Carnwennan
+Gram => Gram (mythology)
+Tyrfing
+Dáinsleif
+Skofnung
+Hǫfuð => Höfuð
+Sword of Freyr => Freyr's sword
+Lævateinn
+Hrunting
+Nægling
+Durendal
+Joyeuse
+Hauteclere
+Tizona
+Colada ~> El Cid
+Claíomh Solais
+Fragarach
+Caladbolg
+Kusanagi-no-Tsurugi
+Totsuka-no-Tsurugi
+Gan Jiang and Mo Ye
+Green Dragon Crescent Blade
+Thuận Thiên => Thuận Thiên (sword)
+Kladenets => Sword Kladenets
+Szczerbiec
+Shamshir-e Zomorrodnegar
+Dhulfiqar => Zulfiqar
+Harpe
+Sword of Damocles => Damocles
+Chandrahasa
+Nandaka
+Khanda (sword) => Khanda (sword)
+Sword of Surtr ~> Surtr
+Kris Taming Sari => Taming Sari
+Cura Si Manjakini
+Sword in the Stone ~> Excalibur
+Flaming sword => Flaming sword (mythology)
+
+[object | Spears, staffs & polearms]
+Gungnir
+Gáe Bulg
+Areadbhar ~> Lugh
+Spear of Lugh => Spear of Lugh
+Lúin of Celtchar
+Rhongomyniad
+Holy Lance +sacred
+Bleeding Lance ~> Fisher King
+Amenonuhoko => Amenonuhoko
+Trident of Poseidon
+Bident of Hades ~> Bident
+Trishula +sacred
+Vel
+Ruyi Jingu Bang
+Staff of Moses
+Aaron's rod
+Rod of Asclepius
+Caduceus
+Thyrsus
+Was sceptre
+Nehushtan
+Circe's staff ~> Circe
+Khatvanga
+Merlin's staff ~> Merlin
+Gríðarvölr
+Gambanteinn
+Opaṣoro ~> Ọbatala
+Ruyi sceptre => Ruyi (scepter)
+
+[object | Hammers, axes, clubs & thunder weapons]
+Mjölnir
+Ukonvasara
+Axe of Perun ~> Perun
+Labrys
+Parashu
+Pangu's axe ~> Pangu
+Oshé of Shango ~> Shango
+Lightning axe of Chaac ~> Chaac
+Uchide no kozuchi
+Lorg Mór ~> The Dagda
+Club of Heracles ~> Heracles
+Sharur => Sharur (mythological weapon)
+Kaumodaki
+Thunderbolt of Zeus ~> Thunderbolt
+Vajra +sacred
+Imhullu
+Xiuhcoatl
+
+[object | Bows, arrows & missiles]
+Gandiva
+Pinaka => Pinaka (Hinduism)
+Sharanga => Sharnga
+Vijaya => Vijaya (bow)
+Bow of Odysseus ~> Odysseus
+Bow of Apollo ~> Apollo
+Bow of Artemis ~> Artemis
+Bow and arrows of Eros ~> Eros
+Arrows of Heracles ~> Heracles
+Bow of Arash ~> Arash the Archer
+Bow of Houyi ~> Houyi
+Fail-not ~> Tristan
+Brahmastra
+Arrow of Brahma => Brahmastra
+Pashupatastra
+Narayanastra
+Agneyastra
+Varunastra
+Sudarshana Chakra
+Vasavi Shakti ~> Ghatotkacha
+Crossbow of An Dương Vương ~> An Dương Vương
+Elf-arrow ~> Elf-shot
+Silver bullet
+Freischütz magic bullet ~> Der Freischütz
+Tathlum ~> Lugh
+Mistletoe dart ~> Baldr
+
+[object | Armor, shields & headgear]
+Aegis
+Shield of Achilles
+Shield of Aeneas ~> Aeneid
+Ancile
+Pridwen
+Svalinn
+Armor of Achilles ~> Achilles
+Kavacha of Karna ~> Karna
+Babr-e Bayan
+Cap of Invisibility => Cap of invisibility
+Tarnhelm
+Helm of Awe
+Huliðshjálmr ~> Tarnhelm
+Winged petasos => Petasos
+Sun Wukong's headband ~> Sun Wukong
+Saci's cap ~> Saci (Brazilian folklore)
+Járngreipr
+Megingjörð
+
+[object | Clothing, cloaks & footwear]
+Golden Fleece
+Talaria
+Seven-league boots
+Cestus of Aphrodite => Girdle of Aphrodite
+Girdle of Hippolyta => Girdle of Hippolyta
+Shirt of Nessus => Shirt of Nessus
+Freyja's falcon cloak ~> Freyja
+Hagoromo ~> Hagoromo (play)
+Swan maiden's cloak ~> Swan maiden
+Tarnkappe ~> Cloak of invisibility
+Mantle of Arthur ~> Thirteen Treasures of the Island of Britain
+Coat of Padarn Red-Coat ~> Thirteen Treasures of the Island of Britain
+Mantle of Elijah ~> Elijah
+Coat of many colors => Coat of many colors
+Seamless Robe of Jesus +sacred
+Veil of Veronica +sacred
+Veil of Isis
+Robe of the Fire-rat ~> The Tale of the Bamboo Cutter
+Nábrók => Necropants
+Cohuleen druith ~> Merrow
+Helskór
+
+[object | Rings, necklaces & jewels]
+Draupnir
+Andvaranaut
+Brísingamen
+Necklace of Harmonia
+Ring of Gyges
+Seal of Solomon +sacred
+Ring of the Nibelung ~> Der Ring des Nibelungen
+Ring of Dispel ~> Orlando Furioso
+Angelica's ring ~> Angelica (character)
+Aladdin's ring ~> Aladdin
+Yasakani no Magatama
+Kaustubha
+Syamantaka
+Cintamani
+Navaratna
+Flaming pearl ~> Chinese dragon
+Tide jewels => Tide jewels
+Five-colored jewel from a dragon's neck ~> The Tale of the Bamboo Cutter
+Hope Diamond
+Karna's earrings ~> Karna
+
+[object | Stones]
+Philosopher's stone
+Lia Fáil
+Stone of Scone
+Omphalos
+Benben
+Baetyl
+Bezoar
+Adder stone
+Toadstone
+Snakestones => Snakestones
+Thunderstone => Thunderstone (folklore)
+Sesshō-seki
+Urim and Thummim
+Seer stone => Seer stone (Latter Day Saints)
+Lapis manalis
+Gjöll => Gjöll
+Singasteinn
+Draconite ~> List of mythological objects
+Lyngurium
+Charmstone
+
+[object | Vessels, food & drink]
+Holy Grail +sacred
+Cauldron of the Dagda ~> The Dagda
+Cauldron of Ceridwen ~> Cerridwen
+Cauldron of Dyrnwch the Giant ~> Thirteen Treasures of the Island of Britain
+Pandora's box
+Cornucopia
+Sampo
+Óðrerir
+Ambrosia and nectar ~> Ambrosia
+Amrita
+Soma => Soma (drink)
+Cup of Jamshid
+Aladdin's lamp ~> Aladdin
+Golden apples of the Hesperides => Golden apple
+Apples of Iðunn ~> Iðunn
+Apple of Discord
+Peaches of Immortality => Peaches of Immortality
+Pomegranate of Persephone ~> Persephone
+
+[object | Instruments & horns]
+Gjallarhorn
+Olifant => Olifant (instrument)
+Horn of Gabriel => Gabriel's Horn
+Lyre of Orpheus ~> Lyra
+Pan pipes => Pan flute
+Uaithne => Uaithne
+Panchajanya
+Shofar +sacred
+
+[object | Mirrors, books & tablets]
+Yata no Kagami
+Smoking Mirror of Tezcatlipoca ~> Tezcatlipoca
+Book of Thoth
+Tablet of Destinies
+Emerald Tablet
+Tablets of the Law +sacred
+
+[object | Vehicles & ships]
+Argo
+Skíðblaðnir
+Naglfar
+Chariot of Helios ~> Helios
+Pushpaka Vimana
+Flying carpet
+Hut of Baba Yaga ~> Baba Yaga
+Ark of the Covenant +sacred
+Noah's Ark +sacred
+
+[object | Bindings & other objects]
+Gleipnir
+Thread of Ariadne ~> Ariadne's thread (logic)
+Thread of the Moirai ~> Moirai
+Gordian knot
+Magic wand ~> Wand
+Witch's broom ~> Broom
+Crystal ball
+Hand of Glory
+Bajiaoshan ~> Princess Iron Fan
+Māui's fishhook ~> Māui (Māori mythology)
+
+[object | Thirteen Treasures of the Island of Britain]
+Thirteen Treasures of the Island of Britain
+Dyrnwyn
+Hamper of Gwyddno Garanhir ~> Thirteen Treasures of the Island of Britain
+Horn of Brân Galed ~> Thirteen Treasures of the Island of Britain
+Chariot of Morgan Mwynfawr ~> Thirteen Treasures of the Island of Britain
+Halter of Clydno Eiddyn ~> Thirteen Treasures of the Island of Britain
+Knife of Llawfrodedd the Horseman ~> Thirteen Treasures of the Island of Britain
+Whetstone of Tudwal Tudglyd ~> Thirteen Treasures of the Island of Britain
+Crock and Dish of Rhygenydd Ysgolhaig ~> Thirteen Treasures of the Island of Britain
+Chessboard of Gwenddoleu ap Ceidio ~> Thirteen Treasures of the Island of Britain
+Mantle of Tegau Gold-Breast ~> Thirteen Treasures of the Island of Britain
+Ring of Eluned ~> Thirteen Treasures of the Island of Britain
+
+[object | Trees & sacred plants]
+Yggdrasil
+Tree of Life => Tree of life +symbol
+Tree of Knowledge of Good and Evil +sacred
+Bodhi tree +sacred
+Ashvattha
+Fusang
+Peach tree of Xi Wangmu ~> Queen Mother of the West
+Mistletoe +symbol
+Mandrake => Mandrake
+Moly => Moly (herb)
+Lotus of the Lotus-eaters => Lotophagi
+
+[symbol | Shapes & signs]
+Ouroboros
+Triskelion
+Triquetra
+Spiral
+Labyrinth
+Pentagram
+Hexagram
+Circle ~> Sacred geometry
+Cross => Cross
+Square ~> Sacred geometry
+Triangle ~> Sacred geometry
+Vesica piscis
+Flower of Life ~> Overlapping circles grid
+Seed of Life ~> Overlapping circles grid
+Mandala +sacred
+Sri Yantra +sacred
+Yin and yang
+Bagua +sacred
+Ensō
+Valknut
+Vegvísir
+Sun cross
+Swastika +sacred
+Celtic cross +sacred
+Endless knot +sacred
+Koru
+Mitsudomoe => Tomoe +sacred
+
+[symbol | Eyes & hands]
+Eye of Horus +sacred
+Eye of Ra
+Eye of Providence +sacred
+Evil eye => Nazar (amulet)
+Hamsa +sacred
+Hand of Glory
+
+[symbol | Animals]
+Serpent => Serpent (symbolism)
+Dragon
+Phoenix => Phoenix (mythology)
+Lion => Lion (heraldry)
+Eagle => Eagle (heraldry)
+Owl => Owl
+Raven => Raven
+Wolf => Wolf
+Bull => Bull (mythology)
+Horse ~> Horse worship
+Stag ~> Deer
+Hare => Hare
+Fox => Fox
+Fish ~> Ichthys
+Dove => Doves as symbols
+Peacock ~> Peafowl
+Swan => Swan
+Butterfly => Butterfly
+Bee => Bee (mythology)
+Scarab => Scarab (artifact)
+Spider => Spider
+Tortoise ~> World Turtle
+Cat ~> Cats in ancient Egypt
+Dog => Dog
+Bear ~> Bear worship
+Crane => Crane (bird)
+Frog => Frog
+Salmon of Knowledge
+
+[symbol | Mythic creatures as symbols]
+Unicorn
+Griffin
+Pegasus
+Sphinx
+Thunderbird => Thunderbird (mythology)
+Feathered serpent => Feathered Serpent
+Kitsune
+Green Man
+Sheela na gig
+
+[symbol | Plants & flowers]
+Rose => Rose (symbolism)
+Lily => Lilium
+Lotus => Nelumbo nucifera +sacred
+Oak => Oak
+Olive branch
+Laurel => Laurel wreath
+Ivy => Hedera
+Vine => Grapevine
+Fig => Common fig
+Pomegranate
+Apple => Apple (symbolism)
+Poppy ~> Remembrance poppy
+Cypress => Cupressus
+Willow => Willow
+Cherry blossom
+Four-leaf clover
+
+[symbol | Celestial & elements]
+Sun ~> Solar deity
+Moon ~> Lunar deity
+Triple Moon => Triple Goddess (Neopaganism)
+Stars ~> Star (heraldry)
+Morning star => Phosphorus (morning star)
+Rainbow => Rainbows in mythology
+Comet => Comet
+Fire => Fire (classical element)
+Water => Water (classical element)
+Earth => Earth (classical element)
+Air => Air (classical element)
+Aether => Aether (classical element)
+Aries => Aries (astrology)
+Taurus => Taurus (astrology)
+Gemini => Gemini (astrology)
+Cancer => Cancer (astrology)
+Leo => Leo (astrology)
+Virgo => Virgo (astrology)
+Libra => Libra (astrology)
+Scorpio => Scorpio (astrology)
+Sagittarius => Sagittarius (astrology)
+Capricorn => Capricorn (astrology)
+Aquarius => Aquarius (astrology)
+Pisces => Pisces (astrology)
+Sol (alchemy) ~> Alchemical symbol
+Luna (alchemy) ~> Alchemical symbol
+Mercury (alchemy) ~> Mercury (element)
+Sulfur (alchemy) ~> Sulfur
+Salt (alchemy) ~> Salt
+
+[symbol | Numbers & colours]
+Three => 3
+Four => 4
+Seven => 7
+Nine => 9
+Twelve => 12 (number)
+Thirteen => 13 (number)
+Forty => 40 (number)
+Red => Red
+White => White
+Black => Black
+Gold => Gold (color)
+Blue => Blue
+Green => Green
+Purple => Purple
+
+[symbol | Objects as symbols]
+Key => Key (lock)
+Mirror => Mirror
+Door => Door
+Bridge => Bridge
+Ladder ~> Jacob's Ladder
+Well ~> Holy well
+Crossroads => Crossroads (mythology)
+Mountain ~> Sacred mountains
+Cave => Cave
+Anchor => Anchor
+Heart => Heart symbol
+Hourglass => Hourglass
+Skull => Human skull symbolism
+Scales of Justice => Lady Justice
+Crown => Crown
+Throne => Throne
+Torch => Torch
+Candle => Candle
+Mask => Mask
+Wheel of Fortune => Rota Fortunae
+Horseshoe => Horseshoe
+Chalice => Chalice
+Spindle => Spindle (textiles)
+
+[symbol | World cultures]
+Adinkra symbols
+Sankofa
+Gye Nyame
+Vodou vèvè => Veve
+Aztec Sun Stone => Aztec sun stone
+Inti
+Chakana
+Hei-tiki
+Torii +sacred
+Dreamcatcher
+Medicine wheel
+Kokopelli
+Totem pole
+
+[sacred | Christianity]
+Latin cross => Christian cross @ Christianity
+Crucifix @ Christianity
+Chi-Rho @ Christianity
+Ichthys @ Christianity
+Alpha and Omega @ Christianity
+Sacred Heart @ Christianity
+Agnus Dei => Lamb of God @ Christianity
+Crown of thorns @ Christianity
+Dove of the Holy Spirit => Holy Spirit in Christianity @ Christianity
+Keys of Saint Peter => Keys of Heaven @ Christianity
+Pelican in her piety => Pelican in her Piety @ Christianity
+
+[sacred | Judaism]
+Star of David @ Judaism
+Menorah => Menorah (Temple) @ Judaism
+Chai => Chai (symbol) @ Judaism
+Tablets of the Law @ Judaism
+Ark of the Covenant @ Judaism
+Shofar @ Judaism
+Tree of Life (Kabbalah) => Tree of life (Kabbalah) @ Judaism
+Mezuzah @ Judaism
+
+[sacred | Islam]
+Kaaba @ Islam
+Black Stone @ Islam
+Rub el Hizb @ Islam
+Crescent and star => Star and crescent @ Islam
+Green in Islam => Green in Islam @ Islam
+Islamic calligraphy => Islamic calligraphy @ Islam
+
+[sacred | Hinduism]
+Om @ Hinduism
+Swastika @ Hinduism
+Trishula @ Hinduism
+Shiva Lingam => Lingam @ Hinduism
+Shankha @ Hinduism
+Lotus @ Hinduism
+Tilaka @ Hinduism
+Kalasha @ Hinduism
+Sri Yantra @ Hinduism
+
+[sacred | Buddhism]
+Dharmachakra @ Buddhism
+Ashtamangala @ Buddhism
+Parasol (Ashtamangala) => Chatra (umbrella) @ Buddhism
+Pair of golden fish ~> Ashtamangala @ Buddhism
+Treasure vase => Treasure vase @ Buddhism
+Victory banner => Dhvaja @ Buddhism
+Conch (Ashtamangala) => Shankha @ Buddhism
+Lotus @ Buddhism
+Endless knot @ Buddhism
+Dharmachakra @ Buddhism
+Bodhi leaf ~> Bodhi tree @ Buddhism
+Stupa @ Buddhism
+Vajra @ Buddhism
+Buddha footprints => Buddha footprint @ Buddhism
+Begging bowl => Alms bowl @ Buddhism
+
+[sacred | Sikhism]
+Khanda (Sikh symbol) => Khanda (Sikh symbol) @ Sikhism
+Ik Onkar @ Sikhism
+Nishan Sahib @ Sikhism
+
+[sacred | Jainism]
+Ahimsa hand ~> Ahimsa in Jainism @ Jainism
+Jain emblem ~> Jain symbols @ Jainism
+Swastika @ Jainism
+
+[sacred | Zoroastrianism]
+Faravahar @ Zoroastrianism
+Atar @ Zoroastrianism
+
+[sacred | Taoism & Shinto]
+Taijitu @ Taoism
+Bagua @ Taoism
+Torii @ Shinto
+Shimenawa @ Shinto
+Mitsudomoe => Tomoe @ Shinto
+
+[sacred | Other traditions]
+Nine-pointed star ~> Baháʼí symbols @ Baháʼí Faith
+Ringstone symbol ~> Baháʼí symbols @ Baháʼí Faith
+Ankh @ Ancient Egyptian religion
+Djed @ Ancient Egyptian religion
+Tyet @ Ancient Egyptian religion
+Triple Goddess => Triple Goddess (Neopaganism) @ Modern Paganism
+Pentacle @ Wicca
+Mjölnir @ Heathenry
+Valknut @ Heathenry

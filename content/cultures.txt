@@ -1,0 +1,102 @@
+# Cultures and traditions: one canonical name per line, with the region it comes
+# from and an approximate map position (the region's rough centre, not a find-spot).
+#
+#   Canonical name | region | lat, lon | aliases (; separated)
+#   ! Name          drop this culture label (a mistake in a source list)
+#
+# Living faiths are never called "mythology" here (see SOURCING.md and the brief),
+# so Wikipedia's "Christian mythology", "Hindu mythology" etc. are mapped to traditions.
+
+Norse mythology | Scandinavia & Iceland | 62, 15 | Norse polytheism; Scandinavian folklore; Sagas of Icelanders
+Heathenry | Scandinavia (modern, worldwide) | 62, 15 |
+Icelandic folklore | Iceland | 64.9, -18.6 |
+Germanic mythology | Northern Europe | 53, 10 | Continental Germanic mythology; Germanic heroic legend
+German folklore | Germany | 51, 10 | German legend; German fairy tale; German mythology
+Anglo-Saxon mythology | England | 52.5, -1.5 |
+English folklore | England | 52.5, -1.5 | British fairy tale; Northumbrian folklore
+Greek mythology | Greece & the Aegean | 38.5, 23 | Greek; Greek folklore
+Greek philosophy | Greece | 38, 23.7 | Pythagoreanism
+Roman mythology | Rome & Italy | 41.9, 12.5 | Roman imperial cult; Mithraic mysteries
+Hindu tradition | India | 22, 79 | Hindu mythology; Hinduism
+Indian epic tradition | India | 22, 79 | Indian mythology
+Tamil tradition | Tamil Nadu | 11, 78.6 | Tamil mythology
+Ayyavazhi tradition | Southern Tamil Nadu | 8.2, 77.4 | Ayyavazhi mythology
+Buddhist tradition | India, then all of Asia | 24.7, 85 | Buddhism; Buddhist mythology
+Jain tradition | India | 25, 85.3 | Jainism; Jain mythology
+Sikh tradition | Punjab | 31.6, 74.9 | Sikhism
+Ravidassia | Punjab | 31, 75.3 |
+Akan (Ghana) | Ghana | 6.7, -1.6 |
+Yoruba religion | Nigeria & Benin | 7.5, 4 | Yoruba mythology
+Igbo religion | South-east Nigeria | 6, 7.5 | Igbo mythology
+Christian tradition | The Levant, then worldwide | 31.8, 35.2 | Christian mythology; Christianity; Christian; Book of Revelation
+Jewish tradition | The Land of Israel | 31.8, 35.2 | Jewish mythology; Judaism; Jewish; Jewish folklore
+Abrahamic traditions | The Middle East | 31.8, 35.2 | Abrahamic religion; Abrahamic religions
+Islamic tradition | Arabia, then worldwide | 21.4, 39.8 | Islamic mythology; Islam
+Druze | Lebanon & Syria | 33.8, 35.6 |
+Baháʼí Faith | Iran, now worldwide | 32.8, 35 | Baháʼí
+Zoroastrian tradition | Iran | 32.4, 53.7 | Zoroastrianism; Zoroastrian mythology
+Persian mythology | Iran | 32.4, 53.7 | Iranian mythology
+Latter Day Saint tradition | New York & Utah | 43.06, -77.23 | Mormon mythology; Book of Mormon; The Church of Jesus Christ of Latter-day Saints
+Community of Christ | Missouri | 39.1, -94.4 |
+Unitarian Universalism | New England | 42.4, -71 |
+Egyptian mythology | Egypt | 26.8, 30.8 | Egyptian; Ancient Egyptian religion
+Kemetism | Egypt (modern revival) | 26.8, 30.8 |
+Mesopotamian mythology | Mesopotamia | 32.5, 44.4 |
+Phoenician mythology | Phoenicia | 34, 35.8 |
+Arabian folklore | Arabia | 24, 45 | Arabic mythology; Arabian mythology
+Ottoman legend | Anatolia | 41, 29 |
+Turkic mythology | Central Asia | 45, 70 | Central Asian legend
+Mongol mythology | Mongolia | 47, 104 | Mongolian mythology
+Irish mythology | Ireland | 53.4, -8 | Irish folklore
+Welsh mythology | Wales | 52.3, -3.7 |
+Celtic mythology | Celtic Europe | 52, -4 | Druidism
+Scottish folklore | Scotland | 56.8, -4.2 |
+Arthurian legend | Britain & France | 51.5, -2.5 | Matter of Britain
+Matter of France | France | 46.6, 2.4 |
+French folklore | France | 46.6, 2.4 | French mythology; Mythology in France
+Medieval legend | Western Europe | 48, 5 | Medieval legends
+European folklore | Europe | 50, 10 |
+Renaissance literature | Italy | 43, 11 | Renaissance fiction
+Western esotericism | Europe | 48, 8 | Thelema
+Modern Paganism | Britain, now worldwide | 51.5, -0.1 | Wicca
+Satanism | United States | 37.8, -122.4 |
+Spanish folklore | Spain | 40, -3.7 | Spanish mythology
+Swiss folklore | Switzerland | 46.8, 8.2 |
+North Frisian folklore | North Frisia | 54.6, 8.6 | North-Frisian mythology
+Swedish folklore | Sweden | 60, 15 |
+Finnish mythology | Finland & Karelia | 62, 25 | Finnic mythologies
+Estonian mythology | Estonia | 58.6, 25 |
+Baltic mythology | The Baltic | 56.9, 24.6 | Baltic; Latvian mythology
+Slavic mythology | Eastern Europe | 52, 25 | Slavic paganism; Slavic folklore
+Russian folklore | Russia | 55, 40 | Russian mythology
+Polish legend | Poland | 52, 19 |
+Czech legend | Bohemia | 49.8, 15.5 |
+Hungarian mythology | Hungary | 47.2, 19.5 |
+Proto-Indo-European religion | Pontic–Caspian steppe | 48, 40 |
+Chinese mythology | China | 34, 108 | Chinese folklore
+Taoist tradition | China | 34, 108 | Taoism
+Japanese mythology | Japan | 36, 138 | Japanese folklore; Japanese urban legends
+Shinto | Japan | 36, 138 |
+Vietnamese mythology | Vietnam | 16, 107 | Vietnamese folklore
+Thai folklore | Thailand | 15, 101 |
+Malay folklore | Malay Peninsula | 4, 102 | Indonesia and Malay folklore
+Javanese tradition | Java | -7.6, 110.2 | Javanism
+Philippine mythology | The Philippines | 12.9, 121.8 |
+Māori mythology | Aotearoa New Zealand | -40.9, 174.9 |
+Australian Aboriginal mythology | Australia | -25, 134 |
+Australian folklore | Australia | -25, 134 |
+Aztec religion | Central Mexico | 19.4, -99.1 | Aztec mythology; Mesoamerican mythology
+Maya mythology | Maya region | 17.2, -89.6 |
+Inca religion | The Andes | -13.5, -72 |
+Brazilian folklore | Brazil | -10, -52 | Brazilian mythology
+Chilote mythology | Chiloé | -42.6, -73.9 | Chilote
+Mapuche religion | Southern Chile | -38.7, -72.6 | Mapuche; Chilean mythology
+Nicaraguan folklore | Nicaragua | 12.9, -85.2 | Nicaraguan culture
+Anishinaabe tradition | Great Lakes | 46, -85 | Anishinaabe mythology
+Abenaki tradition | Northern New England | 44.5, -71 | Abenaki mythology
+Inuit tradition | The Arctic | 66, -100 | Inuit mythology
+American folklore | United States | 39, -98 | American legend
+Canadian folklore | Canada | 56, -96 | Canadian legend
+Modern folklore | Worldwide | | Ufology; Worldwide; Nautical folklore; Various, including Buddhism, Hinduism, and Jainism
+
+! Elf (film)

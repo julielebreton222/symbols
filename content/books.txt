@@ -1,0 +1,40 @@
+# The public-domain library: books quoted in full and searched for passages.
+# Every one was published before 1929 (or is otherwise public domain in the US).
+#
+#   id | Gutenberg ebook number(s) | title | author | translator | year
+#
+# ingest/pd_books.py downloads them, checks each title against the file, splits
+# them into chapters and finds the passages where each entry is named.
+
+golden-bough | 3623 | The Golden Bough (abridged edition) | James George Frazer | | 1922
+bulfinch | 4928 | Bulfinch's Mythology (The Age of Fable, The Age of Chivalry, Legends of Charlemagne) | Thomas Bulfinch | | 1867
+poetic-edda | 73533 | The Poetic Edda | | Henry Adams Bellows | 1923
+prose-edda | 18947 | The Younger Edda (the Prose Edda) | Snorri Sturluson | Rasmus B. Anderson | 1880
+volsunga | 1152 | The Story of the Volsungs | | William Morris and Eiríkr Magnússon | 1888
+nibelungenlied | 1151 | The Nibelungenlied | | George Henry Needler | 1904
+beowulf | 16328 | Beowulf | | Francis B. Gummere | 1910
+mabinogion | 5160 | The Mabinogion | | Lady Charlotte Guest | 1849
+malory | 1251, 1252 | Le Morte d'Arthur | Thomas Malory | | 1485
+high-history | 750 | The High History of the Holy Graal (Perlesvaus) | | Sebastian Evans | 1898
+parzival | 47297, 47298 | Parzival | Wolfram von Eschenbach | Jessie L. Weston | 1894
+idylls | 610 | Idylls of the King | Alfred Tennyson | | 1885
+ritual-romance | 4090 | From Ritual to Romance | Jessie L. Weston | | 1920
+roland | 391 | The Song of Roland | | Charles Kenneth Moncrieff | 1919
+kalevala | 5186 | Kalevala | | John Martin Crawford | 1888
+iliad | 2199 | The Iliad | Homer | Samuel Butler | 1898
+odyssey | 1727 | The Odyssey | Homer | Samuel Butler | 1900
+hesiod | 348 | Hesiod, the Homeric Hymns and Homerica | Hesiod | Hugh G. Evelyn-White | 1914
+argonautica | 830 | The Argonautica | Apollonius of Rhodes | Edward P. Coleridge | 1889
+aeneid | 228 | The Aeneid | Virgil | John Dryden | 1697
+metamorphoses | 21765, 26073 | The Metamorphoses | Ovid | Henry T. Riley | 1851
+mahabharata | 15474, 15475, 15476, 15477 | The Mahabharata (volumes 1–4) | | Kisari Mohan Ganguli | 1883
+ramayana | 24869 | The Rámáyan of Válmíki | Valmiki | Ralph T. H. Griffith | 1874
+gita | 2388 | The Song Celestial (Bhagavad Gita) | | Edwin Arnold | 1885
+dhammapada | 2017 | The Dhammapada (Sacred Books of the East, vol. 10) | | F. Max Müller | 1881
+book-of-dead | 7145 | The Book of the Dead | | E. A. Wallis Budge | 1895
+bible | 10 | The Bible (King James Version) | | | 1611
+quran | 2800 | The Koran | | J. M. Rodwell | 1861
+arabian-nights | 128 | The Arabian Nights Entertainments | | Andrew Lang (ed.) | 1898
+grimm | 2591 | Grimms' Fairy Tales | Jacob and Wilhelm Grimm | Margaret Hunt | 1884
+curious-myths | 36127 | Curious Myths of the Middle Ages | Sabine Baring-Gould | | 1866
+language-of-flowers | 31591 | Language of Flowers | Kate Greenaway | | 1884
