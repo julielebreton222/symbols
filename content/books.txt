@@ -38,3 +38,13 @@ arabian-nights | 128 | The Arabian Nights Entertainments | | Andrew Lang (ed.) |
 grimm | 2591 | Grimms' Fairy Tales | Jacob and Wilhelm Grimm | Margaret Hunt | 1884
 curious-myths | 36127 | Curious Myths of the Middle Ages | Sabine Baring-Gould | | 1866
 language-of-flowers | 31591 | Language of Flowers | Kate Greenaway | | 1884
+republic | 1497 | The Republic | Plato | Benjamin Jowett | 1871
+herodotus | 2707, 2456 | The History of Herodotus | Herodotus | G. C. Macaulay | 1890
+gods-fighting-men | 14465 | Gods and Fighting Men | Lady Gregory | | 1904
+tain | 16464 | The Ancient Irish Epic Tale Táin Bó Cúalnge | | Joseph Dunn | 1914
+fairy-mythology | 41006 | The Fairy Mythology | Thomas Keightley | | 1850
+fairy-faith | 34853 | The Fairy-Faith in Celtic Countries | W. Y. Evans-Wentz | | 1911
+dragon-evolution | 22038 | The Evolution of the Dragon | G. Elliot Smith | | 1919
+japanese-tales | 4018 | Japanese Fairy Tales | Yei Theodora Ozaki | | 1908
+chinese-studio | 43627 | Strange Stories from a Chinese Studio (vol. 1) | Pu Songling | Herbert A. Giles | 1880
+andersen | 1597 | Andersen's Fairy Tales | Hans Christian Andersen | | 1900

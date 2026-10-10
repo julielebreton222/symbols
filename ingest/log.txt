@@ -74,3 +74,7 @@
 2026-10-10 21:41:00  cards: 10 full cards loaded, 0 with errors
 2026-10-10 21:42:09  cards: 12 full cards loaded, 0 with errors
 2026-10-10 21:42:20  export: 1736 entries; index 766 KB, cards 5949 KB
+2026-10-10 21:45:13  cards: 14 full cards loaded, 0 with errors
+2026-10-10 21:46:16  cards: 16 full cards loaded, 0 with errors
+2026-10-10 21:47:14  cards: 18 full cards loaded, 0 with errors
+2026-10-10 21:47:15  export: 1736 entries; index 766 KB, cards 6019 KB
