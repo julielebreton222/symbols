@@ -120,3 +120,14 @@
 2026-10-11 05:29:59  export: 1736 entries; index 806 KB, cards 9613 KB
 2026-10-11 08:31:19  wiki_articles: 1156 articles; fuller overviews for 478 entries, passages for 278 entries in other articles
 2026-10-11 08:31:22  export: 1736 entries; index 806 KB, cards 10743 KB
+2026-10-11 09:22:08  wikidata: 1155 items fetched, 2205 facts stored
+2026-10-11 09:22:08  images: skipped Naja naja cobra a lunettes 69.JPG for cobra: licence “Attribution” is not free enough
+2026-10-11 09:22:08  images: skipped Lightning 02.jpg for lightning: licence “Attribution” is not free enough
+2026-10-11 09:22:08  images: skipped Moravianska venusa.jpg for great-goddess: licence “Attribution” is not free enough
+2026-10-11 09:22:08  images: 1026 images kept, 3 refused for their licence
+2026-10-11 09:22:09  cards: 30 full cards loaded, 0 with errors
+2026-10-11 09:22:10  connections: added 357 links {'owner': 17, 'story': 145, 'part': 17, 'named': 6, 'context': 172}; 1408 links in all; 1243 keyword themes
+2026-10-11 09:22:10  wiki_articles: 1156 articles; fuller overviews for 649 entries, passages for 399 entries in other articles
+2026-10-11 09:28:41  pd_books: 42 books, 100186 paragraphs; 1932 passages for 422 entries
+2026-10-11 09:31:13  tales: 7219 tales read; 6359 tale links for 328 entries
+2026-10-11 09:31:15  export: 1736 entries; index 807 KB, cards 11990 KB
