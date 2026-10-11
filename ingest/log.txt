@@ -116,3 +116,5 @@
 2026-10-10 23:55:08  images: skipped Lightning 02.jpg for lightning: licence “Attribution” is not free enough
 2026-10-10 23:55:08  images: skipped Moravianska venusa.jpg for great-goddess: licence “Attribution” is not free enough
 2026-10-10 23:55:08  images: 1026 images kept, 3 refused for their licence
+2026-10-11 05:29:58  wiki_articles: 1156 articles; fuller overviews for 315 entries, passages for 174 entries in other articles
+2026-10-11 05:29:59  export: 1736 entries; index 806 KB, cards 9613 KB
