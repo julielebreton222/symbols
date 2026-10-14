@@ -13,7 +13,7 @@ Screen" makes it an app that also works offline).
 | | |
 |---|---|
 | Entries | about 1,700, from a hand-made seed list, Wikipedia's lists of mythological objects, magical weapons, religious and mystical symbols and Adinkra symbols, and the seven reference books |
-| Full cards | 30 written for this book (Holy Grail, Excalibur, Mjölnir, Vajra, Caduceus, Rod of Asclepius, Ankh, Lotus, Ouroboros, Yggdrasil, Philosopher's stone, Aegis, Ring of Gyges, Cauldron of the Dagda, Kusanagi, Sampo, Cornucopia, Eye of Horus, Hamsa, Om, Dharmachakra, Star of David, Chi-Rho, Swastika, Phoenix, Pomegranate, Golden Fleece, Seal of Solomon, Lia Fáil, Golden apples of the Hesperides) |
+| Full cards | 31 written for this book (Animism, Holy Grail, Excalibur, Mjölnir, Vajra, Caduceus, Rod of Asclepius, Ankh, Lotus, Ouroboros, Yggdrasil, Philosopher's stone, Aegis, Ring of Gyges, Cauldron of the Dagda, Kusanagi, Sampo, Cornucopia, Eye of Horus, Hamsa, Om, Dharmachakra, Star of David, Chi-Rho, Swastika, Phoenix, Pomegranate, Golden Fleece, Seal of Solomon, Lia Fáil, Golden apples of the Hesperides) |
 | Every card | overview; the Wikipedia article in brief, section by section; Wikidata facts; what the seven reference books say; the tales it appears in (Fairies library); passages in 42 public-domain books; its journey through places and times; connections; images; sources |
 | Explore | browse and search (names, or inside every card), themes, the web of connections, the map, journeys through time, the timeline, the reference library |
 | Learn | today's card, spaced-repetition review (SM-2), quizzes, connect the dots, progress |
@@ -31,6 +31,7 @@ content/            the hand-made parts (edit these)
   cultures.txt        cultures and traditions, with map positions
   places.txt          gazetteer for tale origins
   themes.txt          themes and their keywords
+  theme_members.txt   entries chosen by hand for a theme (added, never removed)
   books.txt           public-domain books (Gutenberg) searched for passages
   reference-books/    the seven-book reference dataset (summaries and pages)
   library.txt         your own PDFs (the PDFs go in library/, never published)

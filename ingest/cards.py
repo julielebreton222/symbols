@@ -17,7 +17,8 @@ from common import ROOT, add_to_list, db, log, slugify, source, wiki_source
 
 SECTIONS = {"overview": "Overview", "myth": "Myth & Origin", "lifetime": "Lifetime", "today": "Today",
             "seen": "How it was seen", "debates": "Debates", "article": "Article", "deeper": "Go deeper",
-            "connections": "Connections", "sources": "Sources", "tales": "In the tales", "journey": "Journey"}
+            "connections": "Connections", "sources": "Sources", "tales": "In the tales", "journey": "Journey",
+            "family": "Under this umbrella"}
 BY_HEADING = {v.lower(): k for k, v in SECTIONS.items()}
 LINK_TYPES = {"same-theme", "same-owner", "same-story", "same-culture", "evolved-into", "derived-from",
               "mistaken-for", "parallel", "part-of", "related"}
@@ -198,7 +199,7 @@ def load(con, path, known):
     for kind in ("overview", "myth", "article"):
         if kind in secs:
             store(kind, 0, None, secs[kind])
-    for kind in ("lifetime", "seen", "debates", "today"):
+    for kind in ("lifetime", "seen", "debates", "today", "family"):
         for i, (heading, body) in enumerate(subsections(secs.get(kind, ""))):
             store(kind, i, heading, body)
     if "overview" in secs:

@@ -131,3 +131,23 @@
 2026-10-11 09:28:41  pd_books: 42 books, 100186 paragraphs; 1932 passages for 422 entries
 2026-10-11 09:31:13  tales: 7219 tales read; 6359 tale links for 328 entries
 2026-10-11 09:31:15  export: 1736 entries; index 807 KB, cards 11990 KB
+2026-10-14 21:44:58  seeds: 54 new entries from seeds.txt (1790 in total)
+2026-10-14 21:45:04  wiki_resolve: no article for deaths-head-hawkmoth: “Acherontia”
+2026-10-14 21:45:04  wiki_resolve: no article for kodama: “Kodama (folklore)”
+2026-10-14 21:45:04  wiki_resolve: no article for fairy-tree: “Fairy tree”
+2026-10-14 21:45:04  wiki_resolve: no article for raven-in-pacific-northwest-tradition: “Raven Tradition”
+2026-10-14 21:45:04  wiki_resolve: 698 entries with their own article, 683 with a context article, 0 found by name, 4 named articles missing
+2026-10-14 21:45:05  wikidata: 1204 items fetched, 2332 facts stored
+2026-10-14 21:47:07  seeds: 1 new entries from seeds.txt (1790 in total)
+2026-10-14 21:48:02  wiki_resolve: 700 entries with their own article, 683 with a context article, 1 found by name, 0 named articles missing
+2026-10-14 21:48:04  wikidata: 1206 items fetched, 2335 facts stored
+2026-10-14 21:48:06  images: skipped Naja naja cobra a lunettes 69.JPG for cobra: licence “Attribution” is not free enough
+2026-10-14 21:48:06  images: skipped Lightning 02.jpg for lightning: licence “Attribution” is not free enough
+2026-10-14 21:48:06  images: skipped Moravianska venusa.jpg for great-goddess: licence “Attribution” is not free enough
+2026-10-14 21:48:06  images: 1125 images kept, 3 refused for their licence
+2026-10-14 21:58:26  cards: 31 full cards loaded, 0 with errors
+2026-10-14 21:58:32  connections: added 357 links {'owner': 17, 'story': 145, 'part': 17, 'named': 6, 'context': 172}; 1475 links in all; 1313 keyword themes; 157 hand-chosen
+2026-10-14 21:58:33  wiki_articles: 1207 articles; fuller overviews for 700 entries, passages for 399 entries in other articles
+2026-10-14 22:05:21  pd_books: 43 books, 102880 paragraphs; 2009 passages for 429 entries
+2026-10-14 22:07:56  tales: 7219 tales read; 6387 tale links for 337 entries
+2026-10-14 22:07:58  export: 1790 entries; index 838 KB, cards 12548 KB

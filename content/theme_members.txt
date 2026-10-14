@@ -1,0 +1,10 @@
+# Hand-chosen theme members: entries that belong to a theme whatever their summary
+# says. Adding an entry here never removes it from its groups, categories or other
+# themes; it only adds this theme, marked "chosen by hand" in the app.
+#
+#   theme | slug, slug, ...        (group:Name adds every entry of a seed group)
+
+animism | group:Animism & spirits
+animism | ancestor, totem-pole, dreamcatcher, medicine-wheel, torii, shimenawa, mikuratana-no-kami, kitsune, thunderbird, feathered-serpent, green-man, mesoamerican-world-tree, world-tree, yggdrasil, sacred-tree-at-uppsala, irminsul, donars-oak, talking-tree, bodhi-tree, ashvattha, banyan, akshayavat, agac-ana, austras-koks, tree, tree-of-growth, oak, oak-tree, mistletoe, fern-flower, raskovnik, mandrake, hungry-grass, sacred-stone, stone, omphalos, benben, black-stone, charmstone, thunderstone, adder-stone, snakestones, mountain, holy-mountain, cosmic-mountain, river, well, cave, forest, forest-jungle, lake, ocean, fire, sacred-fire, wind, rain, rainbow, sun, moon, earth, sky
+animism | serpent, snake, eagle, owl, raven, crow-raven, wolf, bear, stag, deer, hare, fox, horse, bull, cow, salmon-of-knowledge, butterfly, butterfly-moth, bee, honeybee, spider, frog, turtle, tortoise, tortoise-turtle, turtle-tortoise, whale, dolphin, crocodile, elephant, great-cats, falcon, swan, crane, bird, feather, cat, dog, scarab, cobra, animal-image, animal-nature, animals
+animism | mask, drum, makishi-masked-dancers, shade-mukishi, mukula-tree, milk-tree, mudyi, muyombu, lunda-medicine, rituals-of-affliction, hunter-shade, mahamba, ghost, dream, adinkra-symbols, skull

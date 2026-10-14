@@ -1,6 +1,6 @@
 /* Offline: the app shell is cached on install; data files and images are
  * cached as they are used, and refreshed from the network when online. */
-const CACHE = 'symbols-v2';
+const CACHE = 'symbols-v3';
 const SHELL = ['./', 'index.html', 'css/app.css', 'css/vendor/leaflet.css', 'js/store.js', 'js/data.js', 'js/app.js',
   'js/views-explore.js', 'js/views-learn.js', 'js/views-mine.js', 'manifest.webmanifest', 'icons/icon.svg', 'data/app/index.json'];
 self.addEventListener('install', e => { e.waitUntil(caches.open(CACHE).then(c => c.addAll(SHELL)).then(() => self.skipWaiting())); });

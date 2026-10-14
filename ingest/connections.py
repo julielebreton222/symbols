@@ -45,7 +45,7 @@ def link(con, a, b, typ, reason, src, origin):
 def main():
     con = db()
     con.execute("DELETE FROM connections WHERE origin IN ('wikidata', 'wikipedia')")
-    con.execute("DELETE FROM entry_themes WHERE source='keyword'")
+    con.execute("DELETE FROM entry_themes WHERE source IN ('keyword', 'curated')")
     n = {"owner": 0, "story": 0, "part": 0, "named": 0, "context": 0}
 
     by_qid = {r["qid"]: r["slug"] for r in con.execute("SELECT slug, qid FROM entries WHERE qid IS NOT NULL")}
@@ -103,8 +103,27 @@ def main():
             if rx.search(text):
                 con.execute("INSERT OR IGNORE INTO entry_themes VALUES (?,?,?)", (r["slug"], tid, "keyword"))
                 nt += 1
+    # hand-chosen members (content/theme_members.txt): added on top of everything else
+    groups = {}
+    for r in con.execute("SELECT slug, groups FROM entries"):
+        for g in json.loads(r["groups"] or "[]"):
+            groups.setdefault(g, []).append(r["slug"])
+    known = {r[0] for r in con.execute("SELECT slug FROM entries")}
+    nc = 0
+    for line in open(os.path.join(ROOT, "content", "theme_members.txt"), encoding="utf-8"):
+        if not line.strip() or line.startswith("#"):
+            continue
+        tid, members = [x.strip() for x in line.split("|", 1)]
+        for m in (x.strip() for x in members.split(",")):
+            slugs = groups.get(m[6:], []) if m.startswith("group:") else [m] if m in known else []
+            if not slugs:
+                print("theme_members: unknown", m)
+            for slug in slugs:
+                if not con.execute("SELECT 1 FROM entry_themes WHERE slug=? AND theme=?", (slug, tid)).fetchone():
+                    con.execute("INSERT INTO entry_themes VALUES (?,?,?)", (slug, tid, "curated"))
+                    nc += 1
     total = con.execute("SELECT count(*) FROM connections").fetchone()[0]
-    log(con, "connections", f"added {sum(n.values())} links {n}; {total} links in all; {nt} keyword themes")
+    log(con, "connections", f"added {sum(n.values())} links {n}; {total} links in all; {nt} keyword themes; {nc} hand-chosen")
     con.commit()
 
 

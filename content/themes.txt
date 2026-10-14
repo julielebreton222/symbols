@@ -31,3 +31,4 @@ sacred-vessel | Sacred vessels | cauldron|chalice|cup|bowl|vessel|grail|horn of 
 quest | Quests | quest|seek|search for|sought | Objects people go looking for.
 music | Music & sound | music|lyre|harp|horn\b|flute|pipe|drum|song | Instruments with power.
 creation | Creation | creat(?:e|ed|ion) (?:the|of the) (?:world|earth|universe)|cosmogon|primordial | Objects at the beginning of the world.
+animism | Animism & spirits | animis|\bkami\b|nature spirits?|spirits? of (?:the )?(?:forest|tree|river|mountain|place|ancestors?|animals?)|ancestor spirits?|guardian spirit|spirit animal|power animal|totem|nagual|nahual|shaman|sacred (?:grove|tree|mountain|river|spring|well)|souls? of the dead|returning souls | Animals, plants, places and things understood as alive with spirit, as persons to be related to.

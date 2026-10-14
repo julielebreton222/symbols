@@ -48,3 +48,4 @@ dragon-evolution | 22038 | The Evolution of the Dragon | G. Elliot Smith | | 191
 japanese-tales | 4018 | Japanese Fairy Tales | Yei Theodora Ozaki | | 1908
 chinese-studio | 43627 | Strange Stories from a Chinese Studio (vol. 1) | Pu Songling | Herbert A. Giles | 1880
 andersen | 1597 | Andersen's Fairy Tales | Hans Christian Andersen | | 1900
+tylor | 70458, 70484 | Primitive Culture | Edward B. Tylor | | 1871

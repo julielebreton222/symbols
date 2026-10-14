@@ -369,6 +369,66 @@ Crane => Crane (bird)
 Frog => Frog
 Salmon of Knowledge
 
+[symbol | Animism & spirits]
+Animism
+Monarch butterfly => Monarch butterfly
+Black witch moth => Ascalapha odorata
+Moth => Moth
+Death's-head hawkmoth => Death's-head hawkmoth
+Cicada => Cicada
+Firefly => Firefly
+Dragonfly => Dragonfly
+Hummingbird => Hummingbird
+Jaguar => Jaguar
+Quetzal => Resplendent quetzal
+Axolotl => Axolotl
+Coyote => Coyote (mythology)
+Xoloitzcuintle => Xoloitzcuintle
+Eagle and serpent ~> Coat of arms of Mexico
+Cempasúchil => Tagetes erecta
+Copal => Copal
+Ofrenda => Ofrenda
+Calavera => Calavera
+Papel picado => Papel picado
+Day of the Dead => Day of the Dead
+Nagual => Nagual
+Alebrije => Alebrije
+Chaneque => Chaneque
+Alux => Alux
+Ceiba => Ceiba pentandra
+Cenote => Cenote
+Kami => Kami +sacred @ Shinto
+Shintai => Shintai +sacred @ Shinto
+Yorishiro => Yorishiro +sacred @ Shinto
+Kodama => Kodama (spirit)
+Tsukumogami => Tsukumogami
+Totem => Totem
+Power animal => Power animal
+Genius loci => Genius loci
+Sacred grove => Sacred grove
+Sacred mountains => Sacred mountains
+Holy well => Holy well
+Clootie well => Clootie well
+Fairy tree ~> Crataegus monogyna
+Domovoi => Domovoi
+Manitou => Manitou +sacred @ Anishinaabe tradition
+White buffalo => White buffalo +sacred @ Lakota tradition
+Raven in Native American tradition => Ravens in Native American mythology
+Inuksuk => Inuksuk
+Sámi drum => Sámi drum
+Taniwha => Taniwha
+Whanganui River => Whanganui River
+Uluru => Uluru +sacred @ Australian Aboriginal tradition
+Rainbow Serpent => Rainbow Serpent +sacred @ Australian Aboriginal tradition
+Tjurunga => Tjurunga +sacred @ Australian Aboriginal tradition
+The Dreaming => The Dreaming +sacred @ Australian Aboriginal tradition
+Nkisi => Nkisi
+Iroko => Milicia excelsa
+Osun-Osogbo Sacred Grove => Osun-Osogbo Sacred Grove +sacred @ Yoruba religion
+Mami Wata => Mami Wata
+Baobab => Adansonia
+Spirit house => Spirit house
+
 [symbol | Mythic creatures as symbols]
 Unicorn
 Griffin

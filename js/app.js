@@ -244,7 +244,7 @@ window.APP = (function () {
   };
 
   /* ---------------- the card ---------------- */
-  const SECTION_ORDER = [['overview', 'Overview'], ['encyclopedia', 'From the encyclopedia'], ['myth', 'Myth & Origin'], ['lifetime', 'Lifetime'], ['journey', 'Journey'], ['today', 'Today'],
+  const SECTION_ORDER = [['overview', 'Overview'], ['encyclopedia', 'From the encyclopedia'], ['myth', 'Myth & Origin'], ['family', 'Under this umbrella'], ['lifetime', 'Lifetime'], ['journey', 'Journey'], ['today', 'Today'],
     ['seen', 'How it was seen'], ['readings', 'What the books say'], ['debates', 'Debates'], ['article', 'Article'], ['tales', 'In the tales'], ['books', 'In the old books'],
     ['mybooks', 'In my books'], ['deeper', 'Go deeper'], ['connections', 'Connections'], ['images', 'Images'], ['sources', 'Sources'], ['mine', 'My notes']];
   const ERA_NAMES = { ancient: 'Ancient', medieval: 'Medieval', 'early modern': 'Early modern', modern: 'Modern' };
@@ -304,6 +304,7 @@ window.APP = (function () {
     // Myth & origin
     if (secs.myth || c.first) parts.myth = (c.first ? `<p class="firstline">First appears: ${esc(c.first)}</p>` : '') + block(secs.myth);
     if (secs.lifetime) parts.lifetime = `<div class="lifetime">${secs.lifetime.map(s => `<div class="era"><h3>${esc(ERA_NAMES[(s.h || '').toLowerCase()] || s.h || '')}</h3>${numbered(s.html)}</div>`).join('')}</div>`;
+    if (secs.family) parts.family = secs.family.map(s => (s.h ? `<h3>${esc(s.h)}</h3>` : '') + numbered(s.html)).join('');
     if (secs.today) parts.today = secs.today.map(s => (s.h ? `<h3>${esc(s.h)}</h3>` : '') + numbered(s.html)).join('');
     if (secs.seen) parts.seen = secs.seen.map(s => `<div class="lens">${s.h ? `<h3>${esc(s.h)}</h3>` : ''}${numbered(s.html)}</div>`).join('');
     if (secs.debates) parts.debates = secs.debates.map(s => s.h ? `<div class="debate"><h3>${esc(s.h)}</h3>${numbered(s.html)}</div>` : numbered(s.html)).join('');
@@ -405,7 +406,7 @@ window.APP = (function () {
         ${e.a.length ? `<div class="aka">also ${esc(e.a.join(' · '))}</div>` : ''}
         <div class="chips" style="justify-content:center">
           ${[...e.cu, ...(e.tr || []).filter(t => !e.cu.includes(t))].map(x => `<a class="chip" href="#/browse?culture=${encodeURIComponent(x)}">${esc(x)}</a>`).join('')}
-          ${(c.themes || []).map(t => `<a class="chip${t.by === 'keyword' ? ' kw' : ''}" title="${t.by === 'keyword' ? 'Found by keyword in the summary' : t.by.startsWith('book:') ? 'A theme the reference books give it' : 'Theme chosen for this card'}" href="#/theme/${t.id}">${esc((meta.themes[t.id] || {}).name || t.id)}</a>`).join('')}
+          ${(c.themes || []).map(t => `<a class="chip${t.by === 'keyword' ? ' kw' : ''}" title="${t.by === 'keyword' ? 'Found by keyword in the summary' : t.by === 'curated' ? 'Chosen by hand for this theme' : t.by.startsWith('book:') ? 'A theme the reference books give it' : 'Theme chosen for this card'}" href="#/theme/${t.id}">${esc((meta.themes[t.id] || {}).name || t.id)}</a>`).join('')}
         </div>
         <div class="chips" style="justify-content:center">
           ${(e.ow || []).filter(o => o.toLowerCase() !== e.t.toLowerCase()).map(o => `<a class="chip" href="#/owner/${encodeURIComponent(o)}" title="Everything that belongs to ${esc(o)}">✋ ${esc(o)}</a>`).join('')}

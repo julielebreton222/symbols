@@ -84,7 +84,6 @@ Malay folklore | Malay Peninsula | 4, 102 | Indonesia and Malay folklore
 Javanese tradition | Java | -7.6, 110.2 | Javanism
 Philippine mythology | The Philippines | 12.9, 121.8 |
 Māori mythology | Aotearoa New Zealand | -40.9, 174.9 |
-Australian Aboriginal mythology | Australia | -25, 134 |
 Australian folklore | Australia | -25, 134 |
 Aztec religion | Central Mexico | 19.4, -99.1 | Aztec mythology; Mesoamerican mythology
 Maya mythology | Maya region | 17.2, -89.6 |
@@ -95,6 +94,12 @@ Mapuche religion | Southern Chile | -38.7, -72.6 | Mapuche; Chilean mythology
 Nicaraguan folklore | Nicaragua | 12.9, -85.2 | Nicaraguan culture
 Anishinaabe tradition | Great Lakes | 46, -85 | Anishinaabe mythology
 Abenaki tradition | Northern New England | 44.5, -71 | Abenaki mythology
+Mexican folklore | Mexico | 19.4, -99.1 | Mexican culture; Mexican mythology
+Lakota tradition | Great Plains | 44, -101 | Lakota mythology; Lakota
+Pacific Northwest Coast tradition | Pacific Northwest Coast | 54, -130 | Haida mythology; Tlingit mythology; Kwakwaka'wakw mythology
+Sámi tradition | Sápmi | 68.5, 23 | Sámi mythology; Sami mythology; Sámi shamanism
+Kongo religion | Lower Congo | -5, 14 | Kongo mythology
+Australian Aboriginal tradition | Australia | -25, 134 | Australian Aboriginal mythology; Aboriginal Australian religion
 Inuit tradition | The Arctic | 66, -100 | Inuit mythology
 American folklore | United States | 39, -98 | American legend
 Canadian folklore | Canada | 56, -96 | Canadian legend

@@ -108,7 +108,7 @@ def main():
     books = {r["id"]: dict(r) for r in con.execute("SELECT * FROM books")}
     ent_themes, conns, imgs, tales, tale_total, passages, facts, secs = {}, {}, {}, {}, {}, {}, {}, {}
     for r in con.execute("SELECT * FROM entry_themes"):
-        by = "keyword" if r["source"] == "keyword" else (r["source"] if r["source"].startswith("book:") else "card")
+        by = r["source"] if r["source"] in ("keyword", "curated") or r["source"].startswith("book:") else "card"
         ent_themes.setdefault(r["slug"], []).append({"id": r["theme"], "by": by})
     # readings from the seven reference books, kept per book and never merged
     refs, ref_books = {}, {}
