@@ -19,8 +19,12 @@ Screen" makes it an app that also works offline).
 | Learn | today's card, spaced-repetition review (SM-2), quizzes, connect the dots, progress |
 | My book | notes, favourites, highlights, sightings with photos, dream log (with the books' readings as optional lenses), story seeds in folders for each of your books, your own links between cards, reading tracker, collections, back up and restore |
 
-Everything in **My book** is saved only on the device (IndexedDB). It is never sent
-anywhere and never in this repository. Use *Back up* to keep a copy.
+Everything in **My book** is saved on the device (IndexedDB) and never in this
+repository. **Sync across my devices** (My book → Back up & sync) keeps it the same on
+every device through a private gist in your own GitHub account: a button opens GitHub
+to make a key with only the "gist" permission (the Calm Player key works too), and you
+paste it once on each device. Photos of sightings stay on their device. Use *Back up*
+to keep a copy as a file.
 
 ## How it is built
 

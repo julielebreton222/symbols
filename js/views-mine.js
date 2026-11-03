@@ -137,7 +137,7 @@
 
   /* ---------- My book ---------- */
   const TABS = [['', 'Overview'], ['notes', 'Notes'], ['highlights', 'Highlights'], ['sightings', 'Sightings'], ['dreams', 'Dream log'],
-    ['seeds', 'Story seeds'], ['links', 'My links'], ['reading', 'Reading'], ['collections', 'Collections'], ['favorites', 'Favourites'], ['backup', 'Back up']];
+    ['seeds', 'Story seeds'], ['links', 'My links'], ['reading', 'Reading'], ['collections', 'Collections'], ['favorites', 'Favourites'], ['backup', 'Back up & sync']];
   const tabs = cur => `<h1>My book</h1><div class="tabs">${TABS.map(([k, l]) => `<a class="chip${k === cur ? ' on' : ''}" href="#/mine${k ? '/' + k : ''}">${l}</a>`).join('')}</div>`;
 
   A.register('mine', async function (args, query) {
@@ -158,7 +158,7 @@
         <a class="tile" href="#/mine/reading"><b>Reading</b><span>${plural(counts.reading, 'book')} tracked</span></a>
         <a class="tile" href="#/mine/collections"><b>Collections</b><span>${plural(counts.collections, 'collection')}</span></a>
         <a class="tile" href="#/mine/favorites"><b>Favourites</b><span>${counts.favorites} · tap ☆ on any card</span></a>
-        <a class="tile" href="#/mine/backup"><b>Back up &amp; settings</b><span>${plural(counts.seen, 'card')} opened so far</span></a>
+        <a class="tile" href="#/mine/backup"><b>Back up, sync &amp; settings</b><span>${plural(counts.seen, 'card')} opened so far</span></a>
       </div>`);
   });
 
@@ -399,7 +399,9 @@
   async function backup() {
     const base = await A.fairiesBase();
     setPage(tabs('backup') + `
-      <div class="leaf"><h2>Back up</h2>
+      <div class="leaf"><h2>Sync across my devices</h2>
+        <div id="sync-box"></div>
+        <h2>Back up</h2>
         <p>Save everything you have written here (notes, highlights, sightings with their photos, dreams, story seeds, reading, collections, reviews) as one file. Keep it somewhere safe, or open it on another device with Restore.</p>
         <button class="btn primary" id="dl">Download a backup</button>
         <h2>Restore</h2><p>Read a backup file. Items in it are added to (or replace) what is here; nothing else is deleted.</p>
@@ -407,6 +409,7 @@
         <h2>Settings</h2>
         <div class="field"><label>Address of your Fairies book (for “In the tales” links)</label><input type="text" id="fb" value="${esc(base)}" style="width:100%"></div>
         <button class="btn" id="savefb">Save</button></div>`);
+    if (window.SYNC) window.SYNC.panel(document.getElementById('sync-box'));
     document.getElementById('dl').onclick = async () => S.download(await S.backup(), `symbols-backup-${today()}.json`);
     document.getElementById('up').onchange = async ev => {
       const f = ev.target.files[0]; if (!f) return;

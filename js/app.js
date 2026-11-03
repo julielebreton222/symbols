@@ -449,7 +449,7 @@ window.APP = (function () {
         <li><b>Full cards</b> are written in our own words; ideas from copyrighted books are summarised and credited with the page, with at most one short quotation.</li>
       </ul>
       <h3>Your own things</h3>
-      <p>Notes, highlights, sightings, dreams, story seeds, reviews and collections are saved only in this browser on this device. Use <a href="#/mine/backup">Back up</a> to keep a copy or move it to another device.</p>
+      <p>Notes, highlights, sightings, dreams, story seeds, reviews and collections are saved in this browser on this device. Turn on <a href="#/mine/backup">Sync across my devices</a> to have them on your phone and laptop too (through a private gist in your own GitHub account), or use Back up to keep a copy.</p>
       <p class="m small">Data built ${esc(m.built)}.</p></div>`);
   };
   views.books = async function () {

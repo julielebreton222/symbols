@@ -1,7 +1,10 @@
 /* Everything Julie writes lives here, in this browser's IndexedDB (marked
- * persistent). Nothing is ever sent anywhere and nothing is in the repository.
- * "Back up" in My book saves it all (photos included) as one file; "Restore"
- * reads that file on another device. */
+ * persistent). Nothing is in the repository. It is sent nowhere unless she turns
+ * on "Sync across my devices" (js/sync.js), which keeps a copy in a private gist
+ * in her own GitHub account. "Back up" in My book saves it all (photos included)
+ * as one file; "Restore" reads that file on another device.
+ * Every saved item carries _m, the time it was last changed, so two devices can
+ * be combined item by item; deletions are remembered for the same reason. */
 window.STORE = (function () {
   const DB = 'symbols-book', VERSION = 2;
   // store name -> key path
@@ -49,8 +52,29 @@ window.STORE = (function () {
   }
   const all = store => tx(store, 'readonly', s => req2p(s.getAll())).catch(() => []);
   const get = (store, key) => tx(store, 'readonly', s => req2p(s.get(key))).catch(() => undefined);
-  const put = (store, val) => tx(store, 'readwrite', s => req2p(s.put(val)));
-  const del = (store, key) => tx(store, 'readwrite', s => req2p(s.delete(key)));
+  // listeners told about every change (sync.js uses this)
+  const listeners = [];
+  const changed = (store, key) => { for (const f of listeners) try { f(store, key); } catch (e) { /* ignore */ } };
+  const TOMBS = 'symbols-deleted';
+  function tombs() { try { return JSON.parse(localStorage.getItem(TOMBS)) || {}; } catch (e) { return {}; } }
+  function setTombs(t) { try { localStorage.setItem(TOMBS, JSON.stringify(t)); } catch (e) { /* ignore */ } }
+  // raw versions write without stamping or telling anyone (used when applying another device's data)
+  const putRaw = (store, val) => tx(store, 'readwrite', s => req2p(s.put(val)));
+  const delRaw = (store, key) => tx(store, 'readwrite', s => req2p(s.delete(key)));
+  async function put(store, val) {
+    val._m = Date.now();
+    const r = await putRaw(store, val);
+    const k = val[STORES[store]], t = tombs();
+    if (t[store + '|' + k]) { delete t[store + '|' + k]; setTombs(t); }
+    changed(store, k);
+    return r;
+  }
+  async function del(store, key) {
+    const r = await delRaw(store, key);
+    const t = tombs(); t[store + '|' + key] = Date.now(); setTombs(t);
+    changed(store, key);
+    return r;
+  }
   const uid = () => Date.now().toString(36) + Math.random().toString(36).slice(2, 7);
   const now = () => new Date().toISOString();
 
@@ -94,5 +118,6 @@ window.STORE = (function () {
     document.body.appendChild(a); a.click(); a.remove();
     setTimeout(() => URL.revokeObjectURL(a.href), 4000);
   }
-  return { all, get, put, del, uid, now, setting, setSetting, markSeen, backup, restore, download };
+  return { all, get, put, del, uid, now, setting, setSetting, markSeen, backup, restore, download,
+    STORES, putRaw, delRaw, tombs, setTombs, onChange: f => listeners.push(f) };
 })();
