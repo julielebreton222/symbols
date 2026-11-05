@@ -21,10 +21,10 @@ Screen" makes it an app that also works offline).
 
 Everything in **My book** is saved on the device (IndexedDB) and never in this
 repository. **Sync across my devices** (My book → Back up & sync) keeps it the same on
-every device through a private gist in your own GitHub account: a button opens GitHub
-to make a key with only the "gist" permission (the Calm Player key works too), and you
-paste it once on each device. Photos of sightings stay on their device. Use *Back up*
-to keep a copy as a file.
+every device through Supabase: the same project and the same sign-in (email and sync
+password) as the Fairies book, in its own rows (`book = 'symbols'` in the `sync_items`
+table), so nothing needs setting up. Photos of sightings travel too, in a smaller copy.
+A private GitHub gist is kept as the other way. Use *Back up* to keep a copy as a file.
 
 ## How it is built
 

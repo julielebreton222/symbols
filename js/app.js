@@ -449,7 +449,7 @@ window.APP = (function () {
         <li><b>Full cards</b> are written in our own words; ideas from copyrighted books are summarised and credited with the page, with at most one short quotation.</li>
       </ul>
       <h3>Your own things</h3>
-      <p>Notes, highlights, sightings, dreams, story seeds, reviews and collections are saved in this browser on this device. Turn on <a href="#/mine/backup">Sync across my devices</a> to have them on your phone and laptop too (through a private gist in your own GitHub account), or use Back up to keep a copy.</p>
+      <p>Notes, highlights, sightings, dreams, story seeds, reviews and collections are saved in this browser on this device. Turn on <a href="#/mine/backup">Sync across my devices</a> to have them on your phone and laptop too (through your own Supabase project, the same sign-in as the Fairies book), or use Back up to keep a copy.</p>
       <p class="m small">Data built ${esc(m.built)}.</p></div>`);
   };
   views.books = async function () {

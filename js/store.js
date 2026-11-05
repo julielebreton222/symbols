@@ -1,7 +1,7 @@
 /* Everything Julie writes lives here, in this browser's IndexedDB (marked
  * persistent). Nothing is in the repository. It is sent nowhere unless she turns
- * on "Sync across my devices" (js/sync.js), which keeps a copy in a private gist
- * in her own GitHub account. "Back up" in My book saves it all (photos included)
+ * on "Sync across my devices" (js/sync.js), which keeps a copy in her own Supabase
+ * project (or a private GitHub gist). "Back up" in My book saves it all (photos included)
  * as one file; "Restore" reads that file on another device.
  * Every saved item carries _m, the time it was last changed, so two devices can
  * be combined item by item; deletions are remembered for the same reason. */
